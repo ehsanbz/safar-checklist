@@ -30,3 +30,8 @@ GitHub Pages: https://ehsanbz.github.io/safar-checklist/
 Alternate website: https://hamrah-safar-checklist.primeflame14.chatgpt.site
 
 The hosted app is publicly accessible without sign-in. To use locally, download the repository and open index.html.
+
+
+## PDF export
+
+Choose items, then click **خروجی PDF**. Review the finalized Persian A4 document and click **ذخیره PDF / چاپ**. In your browser print dialog, choose **Save as PDF**, A4 portrait, and disable browser headers and footers. All selected items are exported regardless of the active search or display filters; quantities, packing status, location and restriction notes are retained. Export stays on your device and does not upload trip data. This uses the browser's PDF printer rather than a direct PDF download.
