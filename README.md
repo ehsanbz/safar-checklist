@@ -25,6 +25,8 @@ Run `node tests.cjs`. Static files can be hosted by any static hosting provider.
 
 ## Hosted app
 
-Public website: https://hamrah-safar-checklist.primeflame14.chatgpt.site
+GitHub Pages: https://ehsanbz.github.io/safar-checklist/
+
+Alternate website: https://hamrah-safar-checklist.primeflame14.chatgpt.site
 
 The hosted app is publicly accessible without sign-in. To use locally, download the repository and open index.html.
