@@ -21,3 +21,10 @@ The repository includes only generic checklist entries, not original personal no
 ## Validation
 Run `node tests.cjs`. Static files can be hosted by any static hosting provider. On GitHub Pages, choose `/docs` after copying the web files there, or deploy the web files using a Pages workflow. Publishing a private repository through Pages may require a paid plan and makes the page publicly accessible unless the organization supports private Pages.
 
+
+
+## Hosted app
+
+Private owner-access deployment: https://hamrah-safar-checklist.primeflame14.chatgpt.site
+
+The repository and hosted app are currently private. To use locally, download the repository and open index.html.
