@@ -1,0 +1,10 @@
+const test=require('node:test'),assert=require('node:assert/strict'),C=require('./core.js'),fs=require('node:fs'),vm=require('node:vm');
+const ctx={window:{}};vm.runInNewContext(fs.readFileSync('data.js','utf8'),ctx);const items=ctx.window.TRAVEL_ITEMS;
+const profile={transport:['flight'],stays:['hostel'],activities:[],baggage:'small',days:3,laundry:false};
+test('all 353 entries have stable unique IDs',()=>{assert.equal(items.length,353);assert.equal(new Set(items.map(i=>i.id)).size,353);});
+test('accommodation and combined transport filters',()=>{assert(C.relevant({scope:'stay',tag:'hostel'},profile));assert(!C.relevant({scope:'stay',tag:'hotel'},profile));assert(C.relevant({scope:'transport',tag:'train'},{...profile,transport:['flight','train']}));});
+test('no checked bag excludes knives but checked luggage still requires review',()=>{const knife={text:'چاقو یا ابزار چندکاره'};assert.equal(C.restriction(knife,profile).level,'blocked');assert.equal(C.restriction(knife,{...profile,baggage:'checked'}).level,'check');assert.equal(C.restriction(knife,{...profile,baggage:'backpack'}).level,'blocked');});
+test('power bank cabin placement and fuel exclusion',()=>{assert.equal(C.restriction({text:'پاوربانک'},profile).place,'کابین');assert.equal(C.restriction({text:'اجاق و سوخت'},profile).level,'blocked');});
+test('small bag suggestions omit bulky items',()=>{assert(!C.suggested({scope:'base',text:'چندراهی یا سیم‌سیار'},profile));});
+test('quantity changes with days and laundry',()=>{const i={quantity:'daily'};assert.equal(C.quantity(i,profile),4);assert.equal(C.quantity(i,{...profile,days:14}),11);assert.equal(C.quantity(i,{...profile,days:14,laundry:true}),5);});
+test('no universally allowed safety label',()=>{assert.match(C.restriction({text:'کتاب'},profile).note,/نیست/);});
