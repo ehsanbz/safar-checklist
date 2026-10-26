@@ -14,7 +14,7 @@ Open `index.html` directly in a browser. All assets are local. For a local devel
 - Browser-local persistence, Markdown export and printing selected items.
 
 ## Rules and privacy
-The transport labels are conservative planning heuristics, not a legal determination. Check the actual airline, airports, transit and destination rules. No item is labeled universally permitted. No network calls or tracking are used by the application. Profile and checklist state are stored in localStorage on the current browser; clearing browser data removes them. Keep a Markdown export for backup.
+The transport labels are conservative planning heuristics, not a legal determination. Check the actual airline, airports, transit and destination rules. No item is labeled universally permitted. No tracking is used. The optional weather search sends the city name to Open-Meteo Geocoding, and city-center coordinates and trip dates to the Open-Meteo weather APIs. Profile and checklist state are stored in localStorage on the current browser; clearing browser data removes them. Keep a Markdown export for backup.
 
 The repository includes only generic checklist entries, not original personal notes, names, itinerary details or vault links. Generated suggestions require review; items from multiple sections can overlap intentionally.
 
@@ -40,3 +40,10 @@ Choose items, then click **خروجی PDF**. Review the finalized Persian A4 doc
 ## Seasons and dates
 
 Each item shows season suitability (or year-round). Set Gregorian start/end dates; Persian dates and destination seasons appear in the summary and exports. The normal trip view and suggestions filter by every meteorological season touched by the inclusive date range (March-May spring, June-August summer, September-November autumn, December-February winter in the north; inverted in the south). Tropical mode disables seasonal exclusion. A manual season/all-seasons override supports mountains and unusual climates. Without dates, nothing is seasonally excluded. Existing selected items remain selected and exportable, with out-of-season warnings. The all-items bank and selected-items views intentionally retain access to items outside the date filter. Changing dates updates inclusive day count; changing day count updates the end date. This is a seasonal packing guide, not a weather forecast.
+
+
+## Destination weather
+
+The Persian sidebar uses Open-Meteo Geocoding plus Forecast and Historical Weather APIs, free for non-commercial use without an API key. Attribution links to Open-Meteo, ECMWF/ERA5 and CC BY 4.0 are shown in the panel. Select a city and set trip dates. Dates within the 16-day horizon use forecasts; recent past dates use model data, older dates use reanalysis. Dates beyond the forecast horizon show the matching period in up to three available previous years, explicitly labeled as comparisons, not forecasts or climate normals. These are gridded weather-service model/reanalysis data, not individual station observations. Only the first 16 trip days are displayed (clearly marked for longer trips). Missing values remain unknown. Responses are cached in memory for ten minutes; requests time out, cancel on date changes and tolerate partial failure. The saved city stays in localStorage; full checklist data is never sent to the provider. Weather is for sidebar planning and is not included in the checklist PDF.
+
+Sources: https://open-meteo.com/en/docs · https://open-meteo.com/en/docs/historical-weather-api · https://open-meteo.com/en/docs/geocoding-api · https://open-meteo.com/en/terms
