@@ -1,6 +1,6 @@
 (function(root){
 const labels={base:'وسایل پایه',transport:'وسیلهٔ نقلیه',stay:'محل اقامت',activity:'فعالیت و مقصد',review:'بازبینی نهایی'};
-function relevant(item,p){return item.scope==='base'||item.scope==='review'||(item.scope==='transport'&&p.transport.includes(item.tag))||(item.scope==='stay'&&p.stays.includes(item.tag))||(item.scope==='activity'&&p.activities.includes(item.tag));}
+function relevant(item,p){return seasonMatches(item,p)&&( item.scope==='base'||item.scope==='review'||(item.scope==='transport'&&p.transport.includes(item.tag))||(item.scope==='stay'&&p.stays.includes(item.tag))||(item.scope==='activity'&&p.activities.includes(item.tag)));}
 function restriction(item,p){
  const t=item.text; const flight=p.transport.includes('flight');
  if(item.scope==='review'||/^(تعیین تکلیف|خارج‌کردن)/.test(t))return {level:'normal',label:'اقدام پیش از سفر',note:'',place:'کیف دم‌دست'};
@@ -31,7 +31,23 @@ function itemTags(item){
  else if(item.scope==='review'||/حوله|شامپو|صابون|نخ دندان|مسواک|خمیردندان|لباس زیر|جوراب|کفش راحت|شارژر|تلفن همراه|پول نقد|کارت بانکی|قمقمه|آب متناسب|ضدآفتاب|دستمال|ملحفه|روبالشی|کیسه‌خواب|زیرانداز عایق|اطلاعات رزرو|تأیید رزرو|تماس اضطراری|کلید خانه|لنز|عینک طبی|محصولات قاعدگی/.test(t)){priority='needed';priorityLabel='موردنیاز';}
  return {trips,priority,priorityLabel};
 }
-const api={labels,relevant,restriction,quantity,suggested,itemTags};if(typeof module!=='undefined')module.exports=api;else root.TravelCore=api;
+
+const seasonLabels={spring:'بهار',summer:'تابستان',autumn:'پاییز',winter:'زمستان'};
+function parseDate(value){if(!/^\d{4}-\d{2}-\d{2}$/.test(value||''))return null;const date=new Date(value+'T00:00:00Z');return Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===value?date:null;}
+function endForDays(start,days){const date=parseDate(start);if(!date)return '';date.setUTCDate(date.getUTCDate()+Math.max(1,Math.min(365,Number(days)||1))-1);return date.toISOString().slice(0,10);}
+function tripSeasons(p){if(p.seasonMode&&p.seasonMode!=='auto')return p.seasonMode==='all'?Object.keys(seasonLabels):[p.seasonMode];if(p.hemisphere==='tropical')return Object.keys(seasonLabels);const start=parseDate(p.startDate);if(!start)return Object.keys(seasonLabels);let end=parseDate(p.endDate)||parseDate(endForDays(p.startDate,p.days));if(!end||end<start)end=start;const set=new Set();for(let n=0,date=new Date(start);date<=end&&n<366;n++,date.setUTCDate(date.getUTCDate()+1)){let index=Math.floor(((date.getUTCMonth()+10)%12)/3);if(p.hemisphere==='south')index=(index+2)%4;set.add(['spring','summer','autumn','winter'][index]);}return [...set];}
+function itemSeasons(item){const t=item.text;const all=Object.keys(seasonLabels);if(Array.isArray(item.seasons)&&item.seasons.length)return item.seasons.filter(s=>all.includes(s));if(item.scope==='review')return all;
+ if(/زنجیرچرخ|تجهیزات زمستانی|لباس پایهٔ گرم|کلاه گرم|جوراب گرم|تجهیزات برف|گرم‌کن شخصی|کاپشن گرم/.test(t))return ['winter'];
+ if(/لایهٔ گرم|سوییشرت|پلیور|پتوی سبک|کیسهٔ آب گرم|لباس گرم/.test(t))return ['spring','autumn','winter'];
+ if(/بارانی|باران|بادگیر|کفش ضدآب/.test(t))return ['spring','autumn','winter'];
+ if(/لباس سبک و پوشش آفتاب|کلاه آفتابی|کلاه آفتاب|دستمال آفتاب/.test(t))return ['spring','summer','autumn'];
+ if(/دافع حشرات|توری/.test(t))return ['spring','summer','autumn'];
+ return all;}
+function seasonMatches(item,p){return itemSeasons(item).some(s=>tripSeasons(p).includes(s));}
+function seasonTag(item){const seasons=itemSeasons(item);return seasons.length===4?'چهارفصل':seasons.map(s=>seasonLabels[s]).join(' / ');}
+function formatTripDate(value){const date=parseDate(value);return date?date.toLocaleDateString('fa-IR',{timeZone:'UTC'}):'ثبت نشده';}
+
+const api={labels,relevant,restriction,quantity,suggested,itemTags,seasonLabels,parseDate,endForDays,tripSeasons,itemSeasons,seasonMatches,seasonTag,formatTripDate};if(typeof module!=='undefined')module.exports=api;else root.TravelCore=api;
 })(typeof window!=='undefined'?window:globalThis);
 
 
