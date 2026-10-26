@@ -6,3 +6,5 @@
 @media print{dialog::backdrop{display:none!important}}
 
 [hidden]{display:none!important}.item-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.item-tags span{font-size:9px;line-height:1.8;border-radius:5px;padding:2px 7px}.trip-tag{background:#f0f3ed;color:#56664d}.priority-tag{background:#edf0eb;color:#66705f}.priority-tag.needed{background:#e2eee9;color:#225c48}.priority-tag.essential{background:#faecd5;color:#855414}.tag-guide{color:var(--muted);font-size:10px;margin:12px 0}.pdf-action-buttons{display:flex;gap:9px;flex-wrap:wrap}.pdf-item-tags{font-size:8px;color:#556b4c;margin-top:4px}.pdf-actions .pdf-action-buttons{flex-shrink:0}
+
+.trip-dates{padding-bottom:15px;border-bottom:1px solid var(--line)}.trip-dates>label{margin-top:10px}.trip-dates input[type=date]{direction:ltr;font-size:11px;padding:9px 5px}.season-summary{font-size:11px;color:#275c49;background:#eff4e6;padding:9px;border-radius:7px;margin-top:12px}.item-tags .season-tag{background:#e9edf8;color:#475c83}.item-tags .season-mismatch{background:#fff0dc;color:#8c6026}
