@@ -35,3 +35,8 @@ The hosted app is publicly accessible without sign-in. To use locally, download 
 ## PDF export
 
 Choose items, then click **خروجی PDF**. Review the finalized Persian A4 document and click **ذخیره PDF / چاپ**. In your browser print dialog, choose **Save as PDF**, A4 portrait, and disable browser headers and footers. All selected items are exported regardless of the active search or display filters; quantities, packing status, location and restriction notes are retained. Export stays on your device and does not upload trip data. This uses the browser's PDF printer rather than a direct PDF download.
+
+
+## Seasons and dates
+
+Each item shows season suitability (or year-round). Set Gregorian start/end dates; Persian dates and destination seasons appear in the summary and exports. The normal trip view and suggestions filter by every meteorological season touched by the inclusive date range (March-May spring, June-August summer, September-November autumn, December-February winter in the north; inverted in the south). Tropical mode disables seasonal exclusion. A manual season/all-seasons override supports mountains and unusual climates. Without dates, nothing is seasonally excluded. Existing selected items remain selected and exportable, with out-of-season warnings. The all-items bank and selected-items views intentionally retain access to items outside the date filter. Changing dates updates inclusive day count; changing day count updates the end date. This is a seasonal packing guide, not a weather forecast.
