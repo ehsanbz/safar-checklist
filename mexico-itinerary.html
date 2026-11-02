@@ -23,7 +23,11 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--text)}.leaflet-popup-content{direction:rtl;text-align:right;line-height:1.6}.leaflet-container a{color:#0f766e}
 .num-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 18px}.num{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--soft);text-align:center}.num b{display:block;font-size:1.15rem}.num .es{display:block;text-align:center;font-size:.95rem}.quick-phrase{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0 18px}.quick-display{font-size:1.45rem;font-weight:800;direction:ltr;text-align:center;padding:14px;background:var(--card);border-radius:10px;margin-bottom:10px}.quick-buttons{display:flex;gap:7px;flex-wrap:wrap}.quick-buttons button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:8px 11px;cursor:pointer}
 .signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sign{border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)}.sign b{display:block;direction:ltr;text-align:left}
-@media(max-width:800px){.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.today-card{border:2px solid var(--a);background:var(--soft)}.today-card h2{margin-bottom:6px}.today-label{display:inline-block;background:var(--a);color:#fff;border-radius:999px;padding:4px 10px;font-size:.85rem;font-weight:700}.today-day{outline:3px solid color-mix(in srgb,var(--a) 55%,transparent);outline-offset:4px;border-radius:12px}.today-actions,.route-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.route-actions a,.today-actions a{display:inline-block;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:7px 10px;border-radius:10px;text-decoration:none;font-size:.9rem}.day-weather{display:inline-flex;gap:6px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px 9px;margin:3px 0 8px;font-size:.86rem}
+.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}.weather-card .meta{font-size:.82rem;color:var(--muted)}
+.money-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.money-panel,.plan-card,.emg-local{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}.money-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}.money-panel label,.emg-local label{display:block;font-size:.88rem;color:var(--muted)}.money-panel input,.emg-local input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);font-size:1rem}.result{font-size:1.35rem;font-weight:800;color:var(--a);margin:8px 0}.tip-buttons{display:flex;gap:7px;flex-wrap:wrap}.tip-buttons button{border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:9px;padding:7px 10px;cursor:pointer}
+.plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-card h3{margin:0 0 6px}.plan-card p{margin:0}.emergency-number{font-size:2rem;font-weight:900;direction:ltr;text-align:center}.local-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.local-note{background:var(--soft);border-radius:10px;padding:10px;font-size:.88rem}.status{font-size:.88rem;color:var(--muted)}
+@media(max-width:800px){.weather-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.money-grid,.plan-grid,.local-fields{grid-template-columns:1fr}.money-row{grid-template-columns:1fr 1fr}}.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.wrap{padding:11px}.hero{padding:20px}}
 @media(max-width:380px){.num-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.signs{grid-template-columns:1fr}}
 @media print{nav,.copy,#phraseSearch,.action{display:none!important}.card,.hero{break-inside:avoid}.hero{background:#fff;color:#000;border:2px solid #000}}
@@ -35,7 +39,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   <p>۳ تا ۱۴ نوامبر ۲۰۲۶ · برنامه روزبه‌روز + اسپانیایی کاربردی</p>
   <div class="route">Cancún → Holbox → Valladolid → Chichén Itzá → Izamal → Mérida → Uxmal → Bacalar → Tulum → Playa del Carmen → Cancún</div>
 </header>
-<nav><a href="#overview">خلاصه</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
+<nav><a href="#overview">خلاصه</a><a href="#today">امروز</a><a href="#weather">هوا</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#money">پول</a><a href="#rain">Plan B</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
 
 <section id="overview" class="card">
 <h2>خلاصه</h2>
@@ -45,6 +49,24 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <button class="action" onclick="window.print()">چاپ / ذخیره PDF</button>
 </section>
 
+
+<section id="today" class="card today-card">
+  <span class="today-label">حالت امروز</span>
+  <h2 id="todayTitle">برنامه امروز</h2>
+  <div id="todayContent">در حال تشخیص روز سفر…</div>
+  <div id="todayWeather" class="status"></div>
+</section>
+
+<section id="weather" class="card">
+  <h2>هوا برای روزهای سفر</h2>
+  <p>پیش‌بینی از Open-Meteo بارگیری می‌شود. اگر احتمال بارش بالا باشد، کارت همان روز علامت می‌خورد و بخش Plan B را ببینید.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+    <button id="refreshWeather" type="button" class="action">به‌روزرسانی هوا</button>
+    <span id="weatherStatus" class="status">هنوز بارگیری نشده</span>
+  </div>
+  <div id="weatherGrid" class="weather-grid"></div>
+  <p class="small">منبع: Open-Meteo. پیش‌بینی هوا ممکن است تغییر کند؛ برای فعالیت‌های قایق و فری، تصمیم نهایی را نزدیک زمان اجرا بگیرید.</p>
+</section>
 
 <section id="map" class="card">
 <h2>نقشه تعاملی مسیر</h2>
@@ -76,7 +98,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 
 <section id="days" class="card"><h2>برنامه دقیق روزانه</h2>
 
-<article class="day"><h3>سه‌شنبه ۳ نوامبر — ورود به Cancún</h3><ul class="timeline">
+<article class="day" data-date="2026-11-03"><h3>سه‌شنبه ۳ نوامبر — ورود به Cancún</h3><ul class="timeline">
 <li><span class="time">17:50</span>فرود در Cancún</li>
 <li><span class="time">17:50–19:15</span>کنترل گذرنامه، بار و خروج</li>
 <li><span class="time">≈18:50</span>تحویل خودرو</li>
@@ -84,7 +106,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">20:30</span>شام سبک و استراحت</li>
 </ul><p class="small">روز اول بازدید اضافه نکنید.</p></article>
 
-<article class="day"><h3>چهارشنبه ۴ نوامبر — Cancún → Chiquilá → Holbox</h3><ul class="timeline">
+<article class="day" data-date="2026-11-04"><h3>چهارشنبه ۴ نوامبر — Cancún → Chiquilá → Holbox</h3><ul class="timeline">
 <li><span class="time">07:30–08:15</span>صبحانه و وسایل</li>
 <li><span class="time">08:30</span>خروج از Cancún</li>
 <li><span class="time">08:30–10:50</span>رانندگی تا Chiquilá · حدود ۲:۱۵ تا ۲:۳۰</li>
@@ -95,7 +117,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">15:30–غروب</span>ساحل، مرکز Holbox و غروب</li>
 </ul><p class="small">خودرو در Chiquilá می‌ماند؛ پارکینگ رسمی و دارای نگهبان انتخاب کنید.</p></article>
 
-<article class="day"><h3>پنجشنبه ۵ نوامبر — Holbox کامل</h3><ul class="timeline">
+<article class="day" data-date="2026-11-05"><h3>پنجشنبه ۵ نوامبر — Holbox کامل</h3><ul class="timeline">
 <li><span class="time">07:30</span>صبحانه</li>
 <li><span class="time">08:30–11:30</span>Punta Mosquito و sandbar؛ بسته به جزر و مد جابه‌جا شود</li>
 <li><span class="time">12:00–13:30</span>ناهار</li>
@@ -103,7 +125,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">17:00–غروب</span>ساحل غربی و غروب</li>
 </ul></article>
 
-<article class="day"><h3>جمعه ۶ نوامبر — Holbox → Valladolid + Cenote Oxmán</h3><ul class="timeline">
+<article class="day" data-date="2026-11-06"><h3>جمعه ۶ نوامبر — Holbox → Valladolid + Cenote Oxmán</h3><ul class="timeline">
 <li><span class="time">07:00</span>صبحانه و Check-out</li>
 <li><span class="time">≈08:30</span>فری Holbox → Chiquilá</li>
 <li><span class="time">≈09:15 QR</span>حرکت با خودرو</li>
@@ -114,7 +136,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">16:00–19:00</span>مرکز Valladolid، Calzada de los Frailes و Convento</li>
 </ul><p class="small">QR = ساعت Quintana Roo · YUC = ساعت Yucatán.</p></article>
 
-<article class="day"><h3>شنبه ۷ نوامبر — Valladolid → Chichén Itzá → Izamal → Mérida</h3><ul class="timeline">
+<article class="day" data-date="2026-11-07"><h3>شنبه ۷ نوامبر — Valladolid → Chichén Itzá → Izamal → Mérida</h3><ul class="timeline">
 <li><span class="time">06:15</span>بیداری و صبحانه سبک</li>
 <li><span class="time">07:00</span>خروج</li>
 <li><span class="time">07:45</span>رسیدن و پارک</li>
@@ -128,7 +150,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">17:30–20:00</span>Paseo de Montejo / مرکز Mérida</li>
 </ul><p class="small">Chichén Itzá اولویت اول است؛ اگر خسته بودید Kinich Kakmó را حذف کنید.</p></article>
 
-<article class="day"><h3>یکشنبه ۸ نوامبر — Uxmal + Mérida</h3><ul class="timeline">
+<article class="day" data-date="2026-11-08"><h3>یکشنبه ۸ نوامبر — Uxmal + Mérida</h3><ul class="timeline">
 <li><span class="time">06:30</span>صبحانه</li>
 <li><span class="time">07:00</span>خروج از Mérida</li>
 <li><span class="time">08:10–08:15</span>رسیدن به Uxmal</li>
@@ -139,7 +161,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">18:30+</span>شام و شب شهر</li>
 </ul></article>
 
-<article class="day"><h3>دوشنبه ۹ نوامبر — Mérida → Bacalar</h3><ul class="timeline">
+<article class="day" data-date="2026-11-09"><h3>دوشنبه ۹ نوامبر — Mérida → Bacalar</h3><ul class="timeline">
 <li><span class="time">07:00</span>صبحانه</li>
 <li><span class="time">08:00 YUC</span>خروج از Mérida</li>
 <li><span class="time">≈10:00</span>توقف کوتاه قهوه / بنزین</li>
@@ -149,7 +171,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">15:00–17:30</span>قدم‌زدن کنار تالاب و استراحت</li>
 </ul></article>
 
-<article class="day"><h3>سه‌شنبه ۱۰ نوامبر — Bacalar کامل</h3><ul class="timeline">
+<article class="day" data-date="2026-11-10"><h3>سه‌شنبه ۱۰ نوامبر — Bacalar کامل</h3><ul class="timeline">
 <li><span class="time">07:30–08:15</span>صبحانه</li>
 <li><span class="time">08:30</span>رفتن به اسکله</li>
 <li><span class="time">09:00–12:00</span>تور قایق Laguna de los Siete Colores</li>
@@ -159,7 +181,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">17:30+</span>غروب و شام</li>
 </ul></article>
 
-<article class="day"><h3>چهارشنبه ۱۱ نوامبر — Bacalar → Tulum → Playa del Carmen</h3><ul class="timeline">
+<article class="day" data-date="2026-11-11"><h3>چهارشنبه ۱۱ نوامبر — Bacalar → Tulum → Playa del Carmen</h3><ul class="timeline">
 <li><span class="time">06:30</span>صبحانه</li>
 <li><span class="time">07:15</span>خروج از Bacalar</li>
 <li><span class="time">07:15–09:45</span>رانندگی تا Tulum</li>
@@ -170,7 +192,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">16:00–19:00</span>ساحل + Quinta Avenida</li>
 </ul></article>
 
-<article class="day"><h3>پنجشنبه ۱۲ نوامبر — Río Secreto + Playa del Carmen</h3><ul class="timeline">
+<article class="day" data-date="2026-11-12"><h3>پنجشنبه ۱۲ نوامبر — Río Secreto + Playa del Carmen</h3><ul class="timeline">
 <li><span class="time">07:00–07:45</span>صبحانه</li>
 <li><span class="time">08:15</span>خروج</li>
 <li><span class="time">≈08:40</span>پذیرش و تجهیزات</li>
@@ -180,7 +202,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">15:00–18:00</span>ساحل، استراحت و Quinta Avenida</li>
 </ul></article>
 
-<article class="day"><h3>جمعه ۱۳ نوامبر — Playa del Carmen → فرودگاه Cancún</h3><ul class="timeline">
+<article class="day" data-date="2026-11-13"><h3>جمعه ۱۳ نوامبر — Playa del Carmen → فرودگاه Cancún</h3><ul class="timeline">
 <li><span class="time">08:00–10:30</span>صبحانه و ساحل</li>
 <li><span class="time">10:30–11:30</span>جمع‌کردن وسایل</li>
 <li><span class="time">12:00</span>Check-out</li>
@@ -192,11 +214,64 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <li><span class="time">19:35</span>پرواز برگشت</li>
 </ul><p class="small">در روز پرواز جاذبه اضافه نکنید.</p></article>
 
-<article class="day"><h3>شنبه ۱۴ نوامبر — Frankfurt → Berlin</h3><ul class="timeline">
+<article class="day" data-date="2026-11-14"><h3>شنبه ۱۴ نوامبر — Frankfurt → Berlin</h3><ul class="timeline">
 <li><span class="time">صبح</span>ورود به Frankfurt</li>
 <li><span class="time">بعدازظهر</span>ادامه مسیر</li>
 <li><span class="time">≈15:35</span>رسیدن به Berlin طبق برنامه فعلی</li>
 </ul></article>
+</section>
+
+
+<section id="money" class="card">
+  <h2>پول، پزو و انعام</h2>
+  <div class="money-grid">
+    <div class="money-panel">
+      <h3>تبدیل EUR ↔ MXN</h3>
+      <p class="small">نرخ به‌صورت آنلاین از Frankfurter گرفته می‌شود؛ اگر در دسترس نباشد می‌توانید نرخ را دستی وارد کنید.</p>
+      <div class="money-row">
+        <label>۱ یورو = چند پزو؟
+          <input id="fxRate" inputmode="decimal" value="20.00" aria-label="نرخ یورو به پزو">
+        </label>
+        <label>مبلغ یورو
+          <input id="eurAmount" inputmode="decimal" value="10" aria-label="مبلغ یورو">
+        </label>
+      </div>
+      <div id="mxnResult" class="result">≈ 200 MXN</div>
+      <div class="money-row">
+        <label>مبلغ پزو
+          <input id="mxnAmount" inputmode="decimal" value="500" aria-label="مبلغ پزو">
+        </label>
+        <div><div id="eurResult" class="result">≈ 25 EUR</div></div>
+      </div>
+      <div id="fxStatus" class="status">نرخ نمونه؛ در حال دریافت نرخ آنلاین…</div>
+    </div>
+    <div class="money-panel">
+      <h3>انعام و پرداخت</h3>
+      <p>در رستوران‌ها و بارها معمولاً <b>۱۰ تا ۱۵٪</b> انعام رایج است. قبل از اضافه‌کردن انعام روی کارت‌خوان، مبلغ و درصد را خودتان بررسی کنید.</p>
+      <label>مبلغ صورت‌حساب به پزو
+        <input id="billAmount" inputmode="decimal" value="500">
+      </label>
+      <div class="tip-buttons">
+        <button type="button" data-tip="10">۱۰٪</button>
+        <button type="button" data-tip="15">۱۵٪</button>
+      </div>
+      <div id="tipResult" class="result">انعام ۱۰٪ = 50 MXN</div>
+      <p class="small">بهتر است مقداری اسکناس کوچک پزو برای پارکینگ، انعام‌های کوچک و جاهایی که کارت نمی‌پذیرند همراه داشته باشید.</p>
+      <a target="_blank" rel="noopener" href="https://visitmexico.com/en/pagina/preguntas-frecuentes">راهنمای رسمی Visit Mexico درباره انعام</a>
+    </div>
+  </div>
+</section>
+
+<section id="rain" class="card">
+  <h2>Plan B برای باران یا لغو فعالیت فضای باز</h2>
+  <div class="plan-grid">
+    <div class="plan-card"><h3>Holbox</h3><p>اگر باران شدید یا دریا نامناسب بود: Punta Mosquito و برنامه ساحلی را جابه‌جا کنید؛ مرکز جزیره، کافه‌ها و استراحت را جایگزین کنید. برنامه فری را جداگانه چک کنید.</p></div>
+    <div class="plan-card"><h3>Valladolid</h3><p>زمان بیشتری برای مرکز تاریخی، Casa de los Venados و کافه‌ها بگذارید؛ Cenote Oxmán را در صورت رعدوبرق یا شرایط نامناسب به تعویق بیندازید.</p></div>
+    <div class="plan-card"><h3>Mérida / Uxmal</h3><p>اگر Uxmal مناسب نبود، زمان بیشتری برای موزه‌ها، Casa de Montejo، بازارها و مرکز Mérida در نظر بگیرید. بازدید فضای باز را به بازه کم‌بارش منتقل کنید.</p></div>
+    <div class="plan-card"><h3>Bacalar</h3><p>اگر تور قایق لغو شد: Fuerte de San Felipe، کافه‌ها و استراحت کنار شهر را جایگزین کنید. در رعدوبرق وارد آب نشوید.</p></div>
+    <div class="plan-card"><h3>Tulum</h3><p>اگر باران شدید بود، بازدید محوطه باستانی را کوتاه یا جابه‌جا کنید و مستقیم به Playa del Carmen بروید؛ زمان آزاد را برای غذا، خرید و استراحت نگه دارید.</p></div>
+    <div class="plan-card"><h3>Playa del Carmen</h3><p>Río Secreto عمدتاً زیرزمینی است اما اجرای تور همچنان به شرایط اپراتور بستگی دارد؛ در صورت لغو، مرکز Playa، کافه‌ها و مراکز خرید سرپوشیده گزینه ساده‌تری هستند.</p></div>
+  </div>
 </section>
 
 <section id="todo" class="card checks"><h2>قبل از سفر / شب قبل هر روز</h2>
@@ -339,6 +414,11 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 </tbody></table></div>
 
 <h3>خودرو، بنزین و پارکینگ</h3><div class="table-wrap"><table class="phrase-table"><tbody>
+<tr><td class="es">¿Qué combustible usa este coche?</td><td class="pron">کِه کومبوستیبلِه اوسا اِستِه کوچِه؟</td><td>این ماشین چه نوع سوختی می‌زند؟</td><td><button class="copy" data-copy="¿Qué combustible usa este coche?">کپی</button></td></tr>
+<tr><td class="es">Lleno de gasolina regular, por favor.</td><td class="pron">یِنو دِ گاسولینا رِگولار</td><td>لطفاً باک را با بنزین معمولی پر کنید.</td><td><button class="copy" data-copy="Lleno de gasolina regular, por favor.">کپی</button></td></tr>
+<tr><td class="es">Quiero pagar con tarjeta.</td><td class="pron">کیِرو پاگار کُن تارخِتا</td><td>می‌خواهم با کارت پرداخت کنم.</td><td><button class="copy" data-copy="Quiero pagar con tarjeta.">کپی</button></td></tr>
+<tr><td class="es">¿Cuántos litros fueron?</td><td class="pron">کوانتوس لیتروس فوئرون؟</td><td>چند لیتر شد؟</td><td><button class="copy" data-copy="¿Cuántos litros fueron?">کپی</button></td></tr>
+<tr><td class="es">No necesito aditivos, gracias.</td><td class="pron">نو نِسِسیتو آدیتیوس، گراسیاس</td><td>افزودنی لازم ندارم، ممنون.</td><td><button class="copy" data-copy="No necesito aditivos, gracias.">کپی</button></td></tr>
 <tr><td class="es">¿Dónde está la gasolinera más cercana?</td><td class="pron">دوندِه اِستا لا گاسولینِرا ماس سِرکانا؟</td><td>نزدیک‌ترین پمپ بنزین کجاست؟</td><td><button class="copy" data-copy="¿Dónde está la gasolinera más cercana?">کپی</button></td></tr>
 <tr><td class="es">Lleno, por favor.</td><td class="pron">یِنو، پور فاوور</td><td>باک را پر کنید.</td><td><button class="copy" data-copy="Lleno, por favor.">کپی</button></td></tr>
 <tr><td class="es">¿Cuánto cuesta el estacionamiento?</td><td class="pron">کوانتو کوئستا اِل اِستاسیونامیِنتو؟</td><td>پارکینگ چقدر است؟</td><td><button class="copy" data-copy="¿Cuánto cuesta el estacionamiento?">کپی</button></td></tr>
@@ -367,7 +447,23 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 </tbody></table></div>
 </section>
 
-<section id="emergency" class="card"><h2>اضطراری</h2><div class="notice">این جمله‌ها برای ارتباط اولیه‌اند؛ در وضعیت واقعی از خدمات اضطراری محلی، بیمه یا شرکت اجاره خودرو کمک بگیرید.</div>
+<section id="emergency" class="card"><h2>اضطراری</h2>
+<div class="notice"><b>شماره اضطراری سراسری مکزیک:</b><div class="emergency-number"><a href="tel:911">911</a></div>برای پلیس، آتش‌نشانی و فوریت پزشکی. سرویس رسمی 24/7 است.</div>
+<div class="emg-local" id="localEmergency">
+  <h3>کارت اضطراری شخصی — فقط روی این دستگاه</h3>
+  <p class="small">این فیلدها در مرورگر شما با localStorage ذخیره می‌شوند و وارد فایل GitHub یا مخزن نمی‌شوند. روی دستگاه مشترک وارد نکنید.</p>
+  <div class="local-fields">
+    <label>شماره اضطراری برگزارکننده سفر<input data-local-emg="tour" inputmode="tel" placeholder="+49 …"></label>
+    <label>شماره اضطراری شرکت اجاره خودرو<input data-local-emg="car" inputmode="tel" placeholder="+49 / +52 …"></label>
+    <label>بیمه / Assistance<input data-local-emg="insurance" inputmode="tel" placeholder="شماره تماس"></label>
+    <label>شماره بیمه / Policy<input data-local-emg="policy" placeholder="Policy / Vertrag"></label>
+    <label>تماس فرد مورد اعتماد<input data-local-emg="trusted" inputmode="tel" placeholder="+49 …"></label>
+    <label>یادداشت ضروری<input data-local-emg="note" placeholder="مثلاً حساسیت، اطلاعات لازم…"></label>
+  </div>
+  <div class="local-note">در وضعیت واقعی، اول 911 و سپس سرویس مرتبط با سفر/خودرو/بیمه را بر اساس نوع مشکل تماس بگیرید.</div>
+  <p><a target="_blank" rel="noopener" href="https://www.gob.mx/911/es/articulos/servicio-de-atencion-de-llamadas-de-emergencias-9-1-1?idiom=es">منبع رسمی 911 مکزیک</a></p>
+</div>
+<div class="notice">جمله‌های زیر برای ارتباط اولیه‌اند؛ اگر وضعیت جدی است، تماس با خدمات اضطراری را به ترجمه یا جست‌وجو موکول نکنید.</div>
 <div class="table-wrap"><table class="phrase-table"><tbody>
 <tr><td class="es">Necesitamos ayuda.</td><td class="pron">نِسِسیتاموس آیودا</td><td>کمک لازم داریم.</td><td><button class="copy" data-copy="Necesitamos ayuda.">کپی</button></td></tr>
 <tr><td class="es">Necesito un médico.</td><td class="pron">نِسِسیتو اون مِدیکو</td><td>به پزشک نیاز دارم.</td><td><button class="copy" data-copy="Necesito un médico.">کپی</button></td></tr>
@@ -378,7 +474,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <tr><td class="es">No me siento bien.</td><td class="pron">نو مِه سیِنتو بیِن</td><td>حالم خوب نیست.</td><td><button class="copy" data-copy="No me siento bien.">کپی</button></td></tr>
 </tbody></table></div></section>
 
-<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۲ نوامبر ۲۰۲۶ · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
+<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۲ نوامبر ۲۰۲۶ · نسخه کامل سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -434,4 +530,105 @@ initTripMap();
 function filterPhrases(){const q=document.getElementById('phraseSearch').value.trim().toLowerCase();document.querySelectorAll('.phrase-table tbody tr').forEach(r=>r.style.display=!q||r.innerText.toLowerCase().includes(q)?'':'none')}
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const v=b.dataset.copy;try{await navigator.clipboard.writeText(v);const o=b.textContent;b.textContent='کپی شد';setTimeout(()=>b.textContent=o,1000)}catch(e){prompt('Copy:',v)}}));
 document.querySelectorAll('input[data-k]').forEach(c=>{const k='mx:'+c.dataset.k;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>localStorage.setItem(k,c.checked?'1':'0'))});
+
+const weatherDays=[
+ {date:'2026-11-03',city:'Cancún',lat:21.1619,lng:-86.8515},
+ {date:'2026-11-04',city:'Holbox',lat:21.5216,lng:-87.3797},
+ {date:'2026-11-05',city:'Holbox',lat:21.5216,lng:-87.3797},
+ {date:'2026-11-06',city:'Valladolid',lat:20.6896,lng:-88.2012},
+ {date:'2026-11-07',city:'Chichén Itzá',lat:20.6843,lng:-88.5678},
+ {date:'2026-11-08',city:'Uxmal',lat:20.3599,lng:-89.7714},
+ {date:'2026-11-09',city:'Bacalar',lat:18.6761,lng:-88.3953},
+ {date:'2026-11-10',city:'Bacalar',lat:18.6761,lng:-88.3953},
+ {date:'2026-11-11',city:'Tulum',lat:20.2149,lng:-87.4295},
+ {date:'2026-11-12',city:'Playa del Carmen',lat:20.6296,lng:-87.0739},
+ {date:'2026-11-13',city:'Cancún',lat:21.1619,lng:-86.8515}
+];
+let wxByDate={};
+function weatherIcon(code){
+ if(code===0)return '☀️'; if([1,2].includes(code))return '🌤️'; if(code===3)return '☁️';
+ if([45,48].includes(code))return '🌫️'; if(code>=51&&code<=67)return '🌧️';
+ if(code>=71&&code<=77)return '🌨️'; if(code>=80&&code<=82)return '🌦️';
+ if(code>=95)return '⛈️'; return '🌡️';
+}
+async function loadWeather(force=false){
+ const status=document.getElementById('weatherStatus'),grid=document.getElementById('weatherGrid');
+ if(!status||!grid)return;
+ const cacheKey='mx:weather:v2',now=Date.now();
+ if(!force){
+  try{const cache=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cache&&now-cache.ts<30*60*1000){wxByDate=cache.data;renderWeather();status.textContent='از حافظه موقت · کمتر از ۳۰ دقیقه قبل';return}}catch(e){}
+ }
+ status.textContent='در حال دریافت پیش‌بینی…';grid.innerHTML='';
+ const groups={};
+ weatherDays.forEach(d=>{const key=d.city+'|'+d.lat+'|'+d.lng;(groups[key]||(groups[key]={...d,dates:[]})).dates.push(d.date)});
+ const results={};
+ try{
+  await Promise.all(Object.values(groups).map(async g=>{
+   const start=g.dates.slice().sort()[0],end=g.dates.slice().sort().at(-1);
+   const url='https://api.open-meteo.com/v1/forecast?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date='+start+'&end_date='+end;
+   const r=await fetch(url);if(!r.ok)throw new Error('weather '+r.status);const j=await r.json();
+   (j.daily.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_probability_max[i]};});
+  }));
+  wxByDate=results;localStorage.setItem(cacheKey,JSON.stringify({ts:now,data:results}));renderWeather();status.textContent='به‌روز شد: '+new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
+ }catch(e){status.textContent='دریافت هوا ممکن نشد؛ اتصال اینترنت را بررسی کنید.';grid.innerHTML='<div class="notice">پیش‌بینی آنلاین در دسترس نیست. برنامه اصلی همچنان قابل استفاده است.</div>'}
+}
+function renderWeather(){
+ const grid=document.getElementById('weatherGrid');if(!grid)return;grid.innerHTML='';
+ weatherDays.forEach(d=>{const w=wxByDate[d.date],el=document.createElement('div');el.className='weather-card';const day=Number(d.date.slice(-2));
+  if(w){el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="wx">'+weatherIcon(w.code)+' '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div class="'+(w.rain>=50?'rain-high':'')+'">احتمال بارش '+Math.round(w.rain||0)+'٪</div>'}
+  else el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="meta">داده موجود نیست</div>';
+  grid.appendChild(el);
+  const art=document.querySelector('.day[data-date="'+d.date+'"]');if(art){let badge=art.querySelector('.day-weather');if(!badge){badge=document.createElement('div');badge.className='day-weather';art.querySelector('h3').insertAdjacentElement('afterend',badge)}badge.textContent=w?weatherIcon(w.code)+' '+Math.round(w.max)+'°/'+Math.round(w.min)+'° · بارش '+Math.round(w.rain||0)+'٪':'هوا: —';}
+ });
+ renderToday();
+}
+document.getElementById('refreshWeather')?.addEventListener('click',()=>loadWeather(true));
+
+const routeByDate={
+ '2026-11-04':[['Cancún','Chiquilá']],
+ '2026-11-06':[['Chiquilá','Valladolid, Yucatán']],
+ '2026-11-07':[['Valladolid, Yucatán','Chichén Itzá'],['Chichén Itzá','Izamal'],['Izamal','Mérida, Yucatán']],
+ '2026-11-08':[['Mérida, Yucatán','Uxmal']],
+ '2026-11-09':[['Mérida, Yucatán','Bacalar']],
+ '2026-11-11':[['Bacalar','Tulum Archaeological Zone'],['Tulum Archaeological Zone','Playa del Carmen']],
+ '2026-11-12':[['Playa del Carmen','Río Secreto']],
+ '2026-11-13':[['Playa del Carmen','Cancún International Airport']]
+};
+function dirUrl(a,b){return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b)+'&travelmode=driving'}
+Object.entries(routeByDate).forEach(([date,routes])=>{const art=document.querySelector('.day[data-date="'+date+'"]');if(!art)return;const box=document.createElement('div');box.className='route-actions';routes.forEach(([a,b])=>{const x=document.createElement('a');x.target='_blank';x.rel='noopener';x.href=dirUrl(a,b);x.textContent='مسیریابی '+a+' → '+b;box.appendChild(x)});art.appendChild(box)});
+
+function localISODate(){const d=new Date();const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return y+'-'+m+'-'+day}
+function renderToday(){
+ const date=localISODate(),title=document.getElementById('todayTitle'),box=document.getElementById('todayContent'),wx=document.getElementById('todayWeather');
+ document.querySelectorAll('.day').forEach(x=>x.classList.toggle('today-day',x.dataset.date===date));
+ const art=document.querySelector('.day[data-date="'+date+'"]');
+ if(art){
+  title.textContent='امروز · '+art.querySelector('h3').textContent.replace(/^.*?—\s*/,'');
+  const lis=[...art.querySelectorAll('.timeline li')].map(li=>'<li>'+li.innerHTML+'</li>').join('');
+  box.innerHTML='<ul class="timeline">'+lis+'</ul><div class="today-actions"><a href="#days">رفتن به برنامه کامل امروز</a><a href="#rain">Plan B باران</a></div>';
+  const w=wxByDate[date];wx.textContent=w?'هوا: '+weatherIcon(w.code)+' '+Math.round(w.max)+'° / '+Math.round(w.min)+'° · احتمال بارش '+Math.round(w.rain||0)+'٪':'';
+ }else{
+  const tripStart='2026-11-03',tripEnd='2026-11-14';
+  if(date<tripStart){title.textContent='سفر هنوز شروع نشده';box.textContent='روز اول سفر ۳ نوامبر است. از بخش «قبل از سفر» برای چک نهایی استفاده کنید.'}
+  else if(date>tripEnd){title.textContent='سفر پایان یافته';box.textContent='برنامه سفر ۳ تا ۱۴ نوامبر ۲۰۲۶ بوده است.'}
+  else {title.textContent='امروز';box.textContent='برای این تاریخ برنامه جداگانه‌ای ثبت نشده است.'}
+  wx.textContent='';
+ }
+}
+renderToday();
+
+async function loadFx(){
+ const rate=document.getElementById('fxRate'),status=document.getElementById('fxStatus');if(!rate)return;
+ try{const r=await fetch('https://api.frankfurter.app/latest?from=EUR&to=MXN');if(!r.ok)throw new Error('fx');const j=await r.json();if(j.rates&&j.rates.MXN){rate.value=Number(j.rates.MXN).toFixed(2);status.textContent='نرخ آنلاین برای '+(j.date||'امروز')+' دریافت شد.';calcFx()}}
+ catch(e){status.textContent='نرخ آنلاین در دسترس نیست؛ نرخ را دستی وارد کنید.'}
+}
+function nval(id){const x=parseFloat(String(document.getElementById(id)?.value||'').replace(',','.'));return Number.isFinite(x)?x:0}
+function calcFx(){const r=nval('fxRate'),eur=nval('eurAmount'),mxn=nval('mxnAmount');document.getElementById('mxnResult').textContent='≈ '+(eur*r).toFixed(0)+' MXN';document.getElementById('eurResult').textContent=r>0?'≈ '+(mxn/r).toFixed(2)+' EUR':'—'}
+['fxRate','eurAmount','mxnAmount'].forEach(id=>document.getElementById(id)?.addEventListener('input',calcFx));
+document.querySelectorAll('[data-tip]').forEach(b=>b.addEventListener('click',()=>{const bill=nval('billAmount'),pct=Number(b.dataset.tip),tip=bill*pct/100;document.getElementById('tipResult').textContent='انعام '+pct+'٪ = '+tip.toFixed(0)+' MXN · جمع '+(bill+tip).toFixed(0)+' MXN'}));
+document.getElementById('billAmount')?.addEventListener('input',()=>document.querySelector('[data-tip="10"]')?.click());
+
+document.querySelectorAll('[data-local-emg]').forEach(inp=>{const k='mx:emg:'+inp.dataset.localEmg;inp.value=localStorage.getItem(k)||'';inp.addEventListener('input',()=>localStorage.setItem(k,inp.value))});
+
+loadWeather(false);loadFx();calcFx();document.querySelector('[data-tip="10"]')?.click();
 </script></body></html>
