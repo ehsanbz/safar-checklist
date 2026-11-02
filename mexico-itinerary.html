@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <title>برنامه سفر مکزیک | ۳ تا ۱۴ نوامبر ۲۰۲۶</title>
 <style>
 :root{--bg:#f6f4ef;--card:#fffdf8;--text:#1f2933;--muted:#667085;--line:#e7e1d7;--a:#0f766e;--soft:#e7f5f2;--warn:#fff4db}
@@ -15,7 +16,16 @@ nav{position:sticky;top:0;z-index:9;background:var(--bg);padding:9px 0;overflow:
 .day{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.day:first-of-type{border-top:0;padding-top:0}.day h3{margin-bottom:6px}.timeline{list-style:none;padding:0}.timeline li{padding:4px 0}.time{direction:ltr;display:inline-block;min-width:94px;color:var(--a);font-weight:800;text-align:left;margin-left:8px}
 .small{color:var(--muted);font-size:.9rem}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:10px 0 18px}table{width:100%;min-width:690px;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th{background:var(--soft)}tr:last-child td{border-bottom:0}.es{direction:ltr;text-align:left;font-family:Arial,sans-serif;font-weight:700}.pron{color:var(--muted)}
 input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:1rem}.copy,.action{border:1px solid var(--line);background:var(--soft);color:var(--text);padding:6px 9px;border-radius:9px;cursor:pointer}.checks label{display:block;margin:9px 0}
+.map-shell{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px;align-items:start}
+#tripMap{height:520px;border:1px solid var(--line);border-radius:14px;overflow:hidden;direction:ltr;background:var(--soft)}
+.map-side{display:flex;flex-direction:column;gap:10px}.map-side select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:1rem}
+.map-list{display:flex;flex-direction:column;gap:6px;max-height:430px;overflow:auto}.map-place{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer;text-align:right}.map-place small{display:block;color:var(--muted)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--text)}.leaflet-popup-content{direction:rtl;text-align:right;line-height:1.6}.leaflet-container a{color:#0f766e}
+.num-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 18px}.num{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--soft);text-align:center}.num b{display:block;font-size:1.15rem}.num .es{display:block;text-align:center;font-size:.95rem}.quick-phrase{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0 18px}.quick-display{font-size:1.45rem;font-weight:800;direction:ltr;text-align:center;padding:14px;background:var(--card);border-radius:10px;margin-bottom:10px}.quick-buttons{display:flex;gap:7px;flex-wrap:wrap}.quick-buttons button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:8px 11px;cursor:pointer}
+.signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sign{border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)}.sign b{display:block;direction:ltr;text-align:left}
+@media(max-width:800px){.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.wrap{padding:11px}.hero{padding:20px}}
+@media(max-width:380px){.num-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.signs{grid-template-columns:1fr}}
 @media print{nav,.copy,#phraseSearch,.action{display:none!important}.card,.hero{break-inside:avoid}.hero{background:#fff;color:#000;border:2px solid #000}}
 </style>
 </head>
@@ -25,7 +35,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   <p>۳ تا ۱۴ نوامبر ۲۰۲۶ · برنامه روزبه‌روز + اسپانیایی کاربردی</p>
   <div class="route">Cancún → Holbox → Valladolid → Chichén Itzá → Izamal → Mérida → Uxmal → Bacalar → Tulum → Playa del Carmen → Cancún</div>
 </header>
-<nav><a href="#overview">خلاصه</a><a href="#days">روزبه‌روز</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#emergency">اضطراری</a></nav>
+<nav><a href="#overview">خلاصه</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
 
 <section id="overview" class="card">
 <h2>خلاصه</h2>
@@ -33,6 +43,35 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <div class="notice"><b>اختلاف ساعت:</b> Cancún، Holbox، Bacalar، Tulum و Playa del Carmen در Quintana Roo هستند و یک ساعت از Valladolid، Chichén Itzá، Izamal و Mérida جلوترند. ساعت‌های زیر محلی‌اند.</div>
 <p><b>اقامت‌ها بدون تغییر:</b> Cancún (۱ شب) · Holbox (۲ شب) · Valladolid (۱ شب) · Mérida (۲ شب) · Bacalar (۲ شب) · Playa del Carmen (۲ شب).</p>
 <button class="action" onclick="window.print()">چاپ / ذخیره PDF</button>
+</section>
+
+
+<section id="map" class="card">
+<h2>نقشه تعاملی مسیر</h2>
+<p>نقاط اصلی مسیر و جاذبه‌ها روی نقشه مشخص شده‌اند. روی هر نقطه بزنید تا روز بازدید و لینک بازکردن در Google Maps را ببینید.</p>
+<div class="notice"><b>نکته:</b> نقشه برای دریافت کاشی‌های OpenStreetMap به اینترنت نیاز دارد. محل نشانگرها برای برنامه‌ریزی سفر هستند و جایگزین مسیریابی لحظه‌ای یا آدرس دقیق پارکینگ/ورودی نیستند.</div>
+<div class="map-shell">
+  <div id="tripMap" aria-label="نقشه مسیر سفر مکزیک"></div>
+  <aside class="map-side">
+    <label for="mapDayFilter"><b>فیلتر بر اساس روز</b></label>
+    <select id="mapDayFilter">
+      <option value="all">همه مسیر</option>
+      <option value="3">۳ نوامبر · Cancún</option>
+      <option value="4">۴ نوامبر · Chiquilá / Holbox</option>
+      <option value="5">۵ نوامبر · Holbox</option>
+      <option value="6">۶ نوامبر · Valladolid</option>
+      <option value="7">۷ نوامبر · Chichén Itzá / Izamal / Mérida</option>
+      <option value="8">۸ نوامبر · Uxmal / Mérida</option>
+      <option value="9">۹ نوامبر · Bacalar</option>
+      <option value="10">۱۰ نوامبر · Bacalar</option>
+      <option value="11">۱۱ نوامبر · Tulum / Playa del Carmen</option>
+      <option value="12">۱۲ نوامبر · Río Secreto</option>
+      <option value="13">۱۳ نوامبر · Cancún Airport</option>
+    </select>
+    <div id="mapList" class="map-list"></div>
+  </aside>
+</div>
+<p class="small">خط مسیر بین نقاط، نمایش تقریبی مسیر کلی سفر است و لزوماً همان جاده‌ای نیست که اپ مسیریابی در لحظه پیشنهاد می‌دهد.</p>
 </section>
 
 <section id="days" class="card"><h2>برنامه دقیق روزانه</h2>
@@ -173,6 +212,88 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <p>برای جست‌وجوی سریع فارسی یا اسپانیایی بنویسید. دکمه «کپی» برای نشان‌دادن جمله به طرف مقابل است.</p>
 <input id="phraseSearch" type="search" placeholder="مثلاً: پارکینگ، تند، ferry، reserva، baño…" oninput="filterPhrases()">
 
+<div class="quick-phrase">
+  <div id="quickPhraseDisplay" class="quick-display" lang="es">No hablo mucho español.</div>
+  <div class="quick-buttons">
+    <button type="button" data-quick="No hablo mucho español.">اسپانیایی بلد نیستم</button>
+    <button type="button" data-quick="Más despacio, por favor.">آهسته‌تر</button>
+    <button type="button" data-quick="Sin picante, por favor.">بدون تندی</button>
+    <button type="button" data-quick="La cuenta, por favor.">صورتحساب</button>
+    <button type="button" data-quick="¿Dónde están los baños?">دستشویی</button>
+    <button type="button" data-quick="Tenemos una reserva.">رزرو داریم</button>
+    <button type="button" data-quick="Necesitamos ayuda.">کمک لازم داریم</button>
+  </div>
+  <p class="small">این کارت برای نشان‌دادن سریع جمله به طرف مقابل است.</p>
+</div>
+
+<div id="numbers">
+<h3>اعداد، ساعت و قیمت</h3>
+<p class="small">در مکزیک اعداد را بیش از همه برای قیمت، ساعت، شماره اتاق، بلیت و پارکینگ لازم دارید.</p>
+<div class="num-grid">
+  <div class="num"><b>0</b><span class="es">cero</span><span class="pron">سِرو</span></div>
+  <div class="num"><b>1</b><span class="es">uno</span><span class="pron">اونو</span></div>
+  <div class="num"><b>2</b><span class="es">dos</span><span class="pron">دوس</span></div>
+  <div class="num"><b>3</b><span class="es">tres</span><span class="pron">تِرِس</span></div>
+  <div class="num"><b>4</b><span class="es">cuatro</span><span class="pron">کواترو</span></div>
+  <div class="num"><b>5</b><span class="es">cinco</span><span class="pron">سینکو</span></div>
+  <div class="num"><b>6</b><span class="es">seis</span><span class="pron">سِیس</span></div>
+  <div class="num"><b>7</b><span class="es">siete</span><span class="pron">سیِته</span></div>
+  <div class="num"><b>8</b><span class="es">ocho</span><span class="pron">اوچو</span></div>
+  <div class="num"><b>9</b><span class="es">nueve</span><span class="pron">نوئِوه</span></div>
+  <div class="num"><b>10</b><span class="es">diez</span><span class="pron">دیِس</span></div>
+  <div class="num"><b>11</b><span class="es">once</span><span class="pron">اونسِه</span></div>
+  <div class="num"><b>12</b><span class="es">doce</span><span class="pron">دوسِه</span></div>
+  <div class="num"><b>13</b><span class="es">trece</span><span class="pron">ترِسِه</span></div>
+  <div class="num"><b>14</b><span class="es">catorce</span><span class="pron">کاتورسِه</span></div>
+  <div class="num"><b>15</b><span class="es">quince</span><span class="pron">کینسِه</span></div>
+  <div class="num"><b>16</b><span class="es">dieciséis</span><span class="pron">دیِسی‌سِیس</span></div>
+  <div class="num"><b>17</b><span class="es">diecisiete</span><span class="pron">دیِسی‌سیِته</span></div>
+  <div class="num"><b>18</b><span class="es">dieciocho</span><span class="pron">دیِسی‌اوچو</span></div>
+  <div class="num"><b>19</b><span class="es">diecinueve</span><span class="pron">دیِسی‌نوئِوه</span></div>
+  <div class="num"><b>20</b><span class="es">veinte</span><span class="pron">بِینته</span></div>
+  <div class="num"><b>21</b><span class="es">veintiuno</span><span class="pron">بِینتی‌اونو</span></div>
+  <div class="num"><b>30</b><span class="es">treinta</span><span class="pron">ترِینتا</span></div>
+  <div class="num"><b>40</b><span class="es">cuarenta</span><span class="pron">کوارِنتا</span></div>
+  <div class="num"><b>50</b><span class="es">cincuenta</span><span class="pron">سینکوئِنتا</span></div>
+  <div class="num"><b>60</b><span class="es">sesenta</span><span class="pron">سِسِنتا</span></div>
+  <div class="num"><b>70</b><span class="es">setenta</span><span class="pron">سِتِنتا</span></div>
+  <div class="num"><b>80</b><span class="es">ochenta</span><span class="pron">اوچِنتا</span></div>
+  <div class="num"><b>90</b><span class="es">noventa</span><span class="pron">نووِنتا</span></div>
+  <div class="num"><b>100</b><span class="es">cien</span><span class="pron">سیِن</span></div>
+  <div class="num"><b>200</b><span class="es">doscientos</span><span class="pron">دوسیِنتوس</span></div>
+  <div class="num"><b>500</b><span class="es">quinientos</span><span class="pron">کینیِنتوس</span></div>
+  <div class="num"><b>1000</b><span class="es">mil</span><span class="pron">میل</span></div>
+  <div class="num"><b>2000</b><span class="es">dos mil</span><span class="pron">دوس میل</span></div>
+</div>
+<div class="table-wrap"><table class="phrase-table"><thead><tr><th>Español</th><th>تلفظ</th><th>کاربرد</th><th></th></tr></thead><tbody>
+<tr><td class="es">treinta y uno</td><td class="pron">ترِینتا ای اونو</td><td>۳۱ — از ۳۱ تا ۹۹ معمولاً «دهگان + y + یکان»</td><td><button class="copy" data-copy="treinta y uno">کپی</button></td></tr>
+<tr><td class="es">ciento veinticinco</td><td class="pron">سیِنتو بِینتی‌سینکو</td><td>۱۲۵</td><td><button class="copy" data-copy="ciento veinticinco">کپی</button></td></tr>
+<tr><td class="es">doscientos cincuenta pesos</td><td class="pron">دوسیِنتوس سینکوئِنتا پِسوس</td><td>۲۵۰ پزو</td><td><button class="copy" data-copy="doscientos cincuenta pesos">کپی</button></td></tr>
+<tr><td class="es">mil quinientos pesos</td><td class="pron">میل کینیِنتوس پِسوس</td><td>۱۵۰۰ پزو</td><td><button class="copy" data-copy="mil quinientos pesos">کپی</button></td></tr>
+<tr><td class="es">Son las ocho y media.</td><td class="pron">سون لاس اوچو ای مِدیا</td><td>ساعت ۸:۳۰ است.</td><td><button class="copy" data-copy="Son las ocho y media.">کپی</button></td></tr>
+<tr><td class="es">A las nueve, por favor.</td><td class="pron">آ لاس نوئِوه</td><td>ساعت ۹ لطفاً.</td><td><button class="copy" data-copy="A las nueve, por favor.">کپی</button></td></tr>
+<tr><td class="es">¿Cuánto es en total?</td><td class="pron">کوانتو اِس اِن توتال؟</td><td>جمعاً چقدر می‌شود؟</td><td><button class="copy" data-copy="¿Cuánto es en total?">کپی</button></td></tr>
+<tr><td class="es">¿Tiene cambio de quinientos?</td><td class="pron">تیِنه کامبیو دِ کینیِنتوس؟</td><td>برای اسکناس ۵۰۰ پزویی خرد دارید؟</td><td><button class="copy" data-copy="¿Tiene cambio de quinientos?">کپی</button></td></tr>
+</tbody></table></div>
+</div>
+
+<h3>کلمات روی تابلوها که سریع باید بشناسید</h3>
+<div class="signs">
+  <div class="sign"><b>Entrada</b>ورودی</div>
+  <div class="sign"><b>Salida</b>خروجی</div>
+  <div class="sign"><b>Abierto</b>باز</div>
+  <div class="sign"><b>Cerrado</b>بسته</div>
+  <div class="sign"><b>Baños</b>سرویس بهداشتی</div>
+  <div class="sign"><b>Efectivo</b>نقد</div>
+  <div class="sign"><b>Tarjeta</b>کارت</div>
+  <div class="sign"><b>Estacionamiento</b>پارکینگ</div>
+  <div class="sign"><b>No estacionar</b>پارک ممنوع</div>
+  <div class="sign"><b>Peaje</b>عوارض جاده</div>
+  <div class="sign"><b>Gasolina</b>بنزین</div>
+  <div class="sign"><b>Desvío</b>مسیر انحرافی</div>
+</div>
+
+
 <h3>پایه و مؤدبانه</h3><div class="table-wrap"><table class="phrase-table"><thead><tr><th>Español</th><th>تلفظ</th><th>معنی</th><th></th></tr></thead><tbody>
 <tr><td class="es">Hola.</td><td class="pron">اولا</td><td>سلام.</td><td><button class="copy" data-copy="Hola.">کپی</button></td></tr>
 <tr><td class="es">Buenos días.</td><td class="pron">بوئنوس دیاس</td><td>صبح بخیر.</td><td><button class="copy" data-copy="Buenos días.">کپی</button></td></tr>
@@ -206,6 +327,15 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <tr><td class="es">La cuenta, por favor.</td><td class="pron">لا کوئنتا</td><td>صورتحساب لطفاً.</td><td><button class="copy" data-copy="La cuenta, por favor.">کپی</button></td></tr>
 <tr><td class="es">¿Podemos pagar con tarjeta?</td><td class="pron">پودِموس پاگار کُن تارخِتا؟</td><td>می‌توانیم با کارت پرداخت کنیم؟</td><td><button class="copy" data-copy="¿Podemos pagar con tarjeta?">کپی</button></td></tr>
 <tr><td class="es">¿La propina está incluida?</td><td class="pron">لا پروپینا اِستا اینکلوئیدا؟</td><td>انعام حساب شده؟</td><td><button class="copy" data-copy="¿La propina está incluida?">کپی</button></td></tr>
+</tbody></table></div>
+
+<h3>پول، خرید و ارتباط روزمره</h3><div class="table-wrap"><table class="phrase-table"><tbody>
+<tr><td class="es">¿Aceptan tarjeta?</td><td class="pron">آسِپتان تارخِتا؟</td><td>کارت قبول می‌کنید؟</td><td><button class="copy" data-copy="¿Aceptan tarjeta?">کپی</button></td></tr>
+<tr><td class="es">¿Tiene cambio?</td><td class="pron">تیِنه کامبیو؟</td><td>پول خرد دارید؟</td><td><button class="copy" data-copy="¿Tiene cambio?">کپی</button></td></tr>
+<tr><td class="es">¿Me da un recibo, por favor?</td><td class="pron">مِه دا اون رِسیبو؟</td><td>رسید می‌دهید لطفاً؟</td><td><button class="copy" data-copy="¿Me da un recibo, por favor?">کپی</button></td></tr>
+<tr><td class="es">¿Dónde hay un cajero automático?</td><td class="pron">دوندِه آی اون کاخِرو آوتوماتیکو؟</td><td>دستگاه خودپرداز کجاست؟</td><td><button class="copy" data-copy="¿Dónde hay un cajero automático?">کپی</button></td></tr>
+<tr><td class="es">¿Cuál es la contraseña del wifi?</td><td class="pron">کوال اِس لا کُنتراسِنیا دِل وای‌فای؟</td><td>رمز وای‌فای چیست؟</td><td><button class="copy" data-copy="¿Cuál es la contraseña del wifi?">کپی</button></td></tr>
+<tr><td class="es">¿Me puede tomar una foto, por favor?</td><td class="pron">مِه پوئدِه تومار اونا فوتو؟</td><td>می‌توانید از ما یک عکس بگیرید؟</td><td><button class="copy" data-copy="¿Me puede tomar una foto, por favor?">کپی</button></td></tr>
 </tbody></table></div>
 
 <h3>خودرو، بنزین و پارکینگ</h3><div class="table-wrap"><table class="phrase-table"><tbody>
@@ -250,7 +380,57 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 
 <footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۲ نوامبر ۲۰۲۶ · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+const mapPoints=[
+ {name:'Cancún',day:'3',lat:21.1619,lng:-86.8515,note:'ورود و شب اول'},
+ {name:'Chiquilá',day:'4',lat:21.4327,lng:-87.3352,note:'پارک خودرو و فری'},
+ {name:'Holbox',day:'4',lat:21.5216,lng:-87.3797,note:'اقامت ۴–۶ نوامبر'},
+ {name:'Punta Mosquito',day:'5',lat:21.5512,lng:-87.3315,note:'روز طبیعت Holbox'},
+ {name:'Valladolid',day:'6',lat:20.6896,lng:-88.2012,note:'مرکز تاریخی و اقامت'},
+ {name:'Cenote Oxmán',day:'6',lat:20.6827,lng:-88.2290,note:'شنای بعدازظهر'},
+ {name:'Chichén Itzá',day:'7',lat:20.6843,lng:-88.5678,note:'بازدید صبح'},
+ {name:'Izamal',day:'7',lat:20.9314,lng:-89.0182,note:'شهر زرد و Convento'},
+ {name:'Mérida',day:'7',lat:20.9674,lng:-89.5926,note:'اقامت ۷–۹ نوامبر'},
+ {name:'Uxmal',day:'8',lat:20.3599,lng:-89.7714,note:'بازدید صبح'},
+ {name:'Bacalar',day:'9',lat:18.6761,lng:-88.3953,note:'اقامت ۹–۱۱ نوامبر'},
+ {name:'Fuerte de San Felipe',day:'10',lat:18.6790,lng:-88.3927,note:'بازدید بعد از تور قایق'},
+ {name:'Cenote Azul',day:'10',lat:18.6477,lng:-88.4094,note:'شنا / استراحت'},
+ {name:'Tulum Archaeological Zone',day:'11',lat:20.2149,lng:-87.4295,note:'توقف در مسیر'},
+ {name:'Playa del Carmen',day:'11',lat:20.6296,lng:-87.0739,note:'اقامت ۱۱–۱۳ نوامبر'},
+ {name:'Río Secreto',day:'12',lat:20.5817,lng:-87.1133,note:'تور صبح'},
+ {name:'Cancún Airport',day:'13',lat:21.0365,lng:-86.8771,note:'تحویل خودرو و پرواز'}
+];
+let tripMap=null,routeLine=null,mapMarkers=[];
+function gmLink(p){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.name);}
+function initTripMap(){
+ if(!window.L||!document.getElementById('tripMap'))return;
+ tripMap=L.map('tripMap',{scrollWheelZoom:false}).setView([20.1,-88.0],7);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(tripMap);
+ routeLine=L.polyline(mapPoints.map(p=>[p.lat,p.lng]),{color:'#0f766e',weight:3,opacity:.75,dashArray:'7 7'}).addTo(tripMap);
+ mapMarkers=mapPoints.map(p=>{
+   const m=L.marker([p.lat,p.lng]).bindPopup('<b>'+p.name+'</b><br>روز '+p.day+' نوامبر · '+p.note+'<br><a target="_blank" rel="noopener" href="'+gmLink(p)+'">باز کردن در Google Maps</a>');
+   m.addTo(tripMap);return {p,m};
+ });
+ tripMap.fitBounds(routeLine.getBounds().pad(.08));
+ renderMapList('all');
+ document.getElementById('mapDayFilter').addEventListener('change',e=>filterMap(e.target.value));
+}
+function filterMap(day){
+ mapMarkers.forEach(({p,m})=>{if(day==='all'||p.day===day){if(!tripMap.hasLayer(m))m.addTo(tripMap)}else if(tripMap.hasLayer(m))tripMap.removeLayer(m)});
+ const pts=day==='all'?mapPoints:mapPoints.filter(p=>p.day===day);
+ if(pts.length)tripMap.fitBounds(L.latLngBounds(pts.map(p=>[p.lat,p.lng])).pad(.25),{maxZoom:12});
+ renderMapList(day);
+}
+function renderMapList(day){
+ const box=document.getElementById('mapList');if(!box)return;box.innerHTML='';
+ mapPoints.filter(p=>day==='all'||p.day===day).forEach(p=>{
+  const b=document.createElement('button');b.type='button';b.className='map-place';b.innerHTML='<b>'+p.name+'</b><small>روز '+p.day+' نوامبر · '+p.note+'</small>';
+  b.addEventListener('click',()=>{const mm=mapMarkers.find(x=>x.p.name===p.name);tripMap.setView([p.lat,p.lng],11);mm.m.openPopup()});box.appendChild(b);
+ });
+}
+document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{document.getElementById('quickPhraseDisplay').textContent=b.dataset.quick}));
+initTripMap();
 function filterPhrases(){const q=document.getElementById('phraseSearch').value.trim().toLowerCase();document.querySelectorAll('.phrase-table tbody tr').forEach(r=>r.style.display=!q||r.innerText.toLowerCase().includes(q)?'':'none')}
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const v=b.dataset.copy;try{await navigator.clipboard.writeText(v);const o=b.textContent;b.textContent='کپی شد';setTimeout(()=>b.textContent=o,1000)}catch(e){prompt('Copy:',v)}}));
 document.querySelectorAll('input[data-k]').forEach(c=>{const k='mx:'+c.dataset.k;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>localStorage.setItem(k,c.checked?'1':'0'))});
