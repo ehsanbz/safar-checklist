@@ -27,7 +27,20 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 .weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}.weather-card .meta{font-size:.82rem;color:var(--muted)}
 .money-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.money-panel,.plan-card,.emg-local{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}.money-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}.money-panel label,.emg-local label{display:block;font-size:.88rem;color:var(--muted)}.money-panel input,.emg-local input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);font-size:1rem}.result{font-size:1.35rem;font-weight:800;color:var(--a);margin:8px 0}.tip-buttons{display:flex;gap:7px;flex-wrap:wrap}.tip-buttons button{border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:9px;padding:7px 10px;cursor:pointer}
 .plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-card h3{margin:0 0 6px}.plan-card p{margin:0}.emergency-number{font-size:2rem;font-weight:900;direction:ltr;text-align:center}.local-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.local-note{background:var(--soft);border-radius:10px;padding:10px;font-size:.88rem}.status{font-size:.88rem;color:var(--muted)}
-@media(max-width:800px){.weather-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.money-grid,.plan-grid,.local-fields{grid-template-columns:1fr}.money-row{grid-template-columns:1fr 1fr}.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.compare-intro{background:var(--soft);border-right:4px solid var(--a);padding:12px 14px;border-radius:12px;margin-bottom:14px}
+.compare-day{border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0;background:var(--card)}
+.compare-day h3{margin:0 0 10px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.compare-col{border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.compare-col.planned{background:color-mix(in srgb,var(--soft) 55%,var(--card))}
+.compare-col.actual{background:var(--card)}
+.compare-col h4{margin:0 0 8px;font-size:1rem}
+.compare-col ul{margin:0;padding-right:19px}
+.compare-col li{margin:4px 0}
+.status-pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:.8rem;font-weight:700;margin-right:6px}
+.status-done{background:#dcfce7;color:#166534}.status-partial{background:#fef3c7;color:#92400e}.status-changed{background:#dbeafe;color:#1e40af}.status-skip{background:#fee2e2;color:#991b1b}.status-unknown{background:#e5e7eb;color:#374151}
+@media(prefers-color-scheme:dark){.status-done{background:#15351f;color:#86efac}.status-partial{background:#3b2e12;color:#fcd34d}.status-changed{background:#172554;color:#93c5fd}.status-skip{background:#3b1717;color:#fca5a5}.status-unknown{background:#30343a;color:#d1d5db}}
+@media(max-width:800px){.compare-grid{grid-template-columns:1fr}}.weather-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.money-grid,.plan-grid,.local-fields{grid-template-columns:1fr}.money-row{grid-template-columns:1fr 1fr}.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.wrap{padding:11px}.hero{padding:20px}}
 @media(max-width:380px){.num-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.signs{grid-template-columns:1fr}}
 @media print{nav,.copy,#phraseSearch,.action{display:none!important}.card,.hero{break-inside:avoid}.hero{background:#fff;color:#000;border:2px solid #000}}
@@ -39,7 +52,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   <p>۳ تا ۱۴ نوامبر ۲۰۲۶ · برنامه روزبه‌روز + اسپانیایی کاربردی</p>
   <div class="route">Cancún → Holbox → Valladolid → Chichén Itzá → Izamal → Mérida → Uxmal → Bacalar → Tulum → Playa del Carmen → Cancún</div>
 </header>
-<nav><a href="#overview">خلاصه</a><a href="#today">امروز</a><a href="#weather">هوا</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#money">پول</a><a href="#rain">Plan B</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
+<nav><a href="#overview">خلاصه</a><a href="#today">امروز</a><a href="#weather">هوا</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#actual">واقعاً انجام شد</a><a href="#money">پول</a><a href="#rain">Plan B</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
 
 <section id="overview" class="card">
 <h2>خلاصه</h2>
@@ -221,6 +234,154 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 </ul></article>
 </section>
 
+
+
+<section id="actual" class="card">
+  <h2>برنامه اولیه ↔ آنچه واقعاً انجام شد</h2>
+  <div class="compare-intro">
+    این بخش به برنامه پیشنهادی اضافه شده و چیزی از برنامه اولیه حذف نشده است. هدف این است که بعداً بتوانیم هر روز را با چیزی که واقعاً اجرا شد مقایسه کنیم.
+  </div>
+
+  <article class="compare-day">
+    <h3>۳ نوامبر — Cancún <span class="status-pill status-done">تقریباً طبق برنامه</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>پرواز Berlin → Frankfurt → Cancún</li><li>تحویل خودرو</li><li>Check-in و استراحت در Cancún</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>پرواز Berlin → Frankfurt → Cancún انجام شد.</li><li>خودرو تحویل گرفته شد.</li><li>شب در Cancún اقامت کردیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۴ نوامبر — Cancún → Chiquilá → Holbox <span class="status-pill status-done">طبق برنامه</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>رانندگی Cancún → Chiquilá</li><li>پارک خودرو</li><li>فری به Holbox</li><li>عصر آزاد در جزیره</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>با خودرو به Chiquilá رفتیم و ماشین را پارک کردیم.</li><li>با فری به Holbox رفتیم و در جزیره مستقر شدیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۵ نوامبر — Holbox <span class="status-pill status-partial">تا نزدیکی Punta Mosquito</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>Punta Mosquito و sandbar</li><li>دوچرخه/گلف‌کارت</li><li>ساحل و غروب</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>تا نزدیکی Punta Mosquito رفتیم، نه تا انتهای آن.</li><li>دوچرخه کرایه کردیم و در جزیره گشتیم.</li><li>سواحل، نقاشی‌های دیواری، کافه‌ها و بوتیک‌ها را دیدیم.</li><li>Zumba در میدان اصلی شهر را هم دیدیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۶ نوامبر — Holbox → Valladolid <span class="status-pill status-done">طبق برنامه</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>فری برگشت و رانندگی به Valladolid</li><li>Cenote Oxmán</li><li>پیاده‌روی عصر در مرکز شهر و صومعه</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>به Chiquilá برگشتیم و با خودرو به Valladolid رفتیم.</li><li><b>Cenote Oxmán</b> را دیدیم؛ این تنها سنوته‌ای بود که در کل سفر رفتیم.</li><li>عصر/شب پیاده‌روی کردیم: خانه‌های رنگی، میدان مرکزی و صومعه.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۷ نوامبر — Chichén Itzá → Mérida <span class="status-pill status-changed">Izamal جابه‌جا شد</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>Chichén Itzá</li><li>Izamal و Kinich Kakmó</li><li>رسیدن به Mérida و گشت عصر</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>Chichén Itzá را با تور راهنما بازدید کردیم؛ تور سر وقت شروع و تمام شد.</li><li>در این روز Izamal نرفتیم.</li><li>هیچ سنوته دیگری نرفتیم.</li><li>به Mérida رسیدیم و عصر/شب در شهر گشتیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۸ نوامبر — Uxmal + Mérida <span class="status-pill status-done">طبق برنامه</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>بازدید Uxmal</li><li>بازگشت و ادامه گشت Mérida</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>Uxmal را بازدید کردیم.</li><li>به Mérida برگشتیم و گشت شهر را ادامه دادیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۹ نوامبر — Mérida → Izamal → Bacalar <span class="status-pill status-changed">مسیر تغییر کرد</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>حرکت مستقیم Mérida → Bacalar</li><li>بعدازظهر سبک در Bacalar</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>بعد از Mérida ابتدا به <b>Izamal</b> رفتیم.</li><li><b>Convento de San Antonio de Padua</b> و <b>Kinich Kakmó</b> را دیدیم.</li><li>هیچ سنوته‌ای در این روز نرفتیم.</li><li>سپس مسیر طولانی را به Bacalar ادامه دادیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۱۰ نوامبر — Bacalar <span class="status-pill status-done">بخش اصلی انجام شد</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>تور قایق Laguna Bacalar</li><li>Fuerte de San Felipe</li><li>Cenote Azul یا استراحت کنار آب</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>تور تالاب با <b>قایق موتوری</b> انجام شد.</li><li><b>Fuerte de San Felipe</b> را بازدید کردیم.</li><li><span class="status-pill status-skip">انجام نشد</span> Cenote Azul نرفتیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۱۱ نوامبر — Tulum → Playa del Carmen <span class="status-pill status-done">طبق مسیر اصلی</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>Tulum Archaeological Zone</li><li>حرکت به Playa del Carmen</li><li>ساحل / Quinta Avenida</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li>محوطه باستانی Tulum را بازدید کردیم.</li><li>به Playa del Carmen رسیدیم.</li><li>برای غذا به <b>El Fogón</b>، تاکوفروشی معروف، رفتیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۱۲ نوامبر — Playa del Carmen <span class="status-pill status-changed">برنامه به‌خاطر باران تغییر کرد</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>Río Secreto</li><li>بعدازظهر ساحل و مرکز Playa del Carmen</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li><span class="status-pill status-skip">انجام نشد</span> Río Secreto نرفتیم.</li><li>به یک ساحل با پارکینگ رفتیم؛ هزینه ورود <b>نفری ۸۰ پزو</b> بود.</li><li>به‌دلیل هوای بارانی از سوپرمارکت خرید کردیم.</li><li>شام را در رستوران دریایی <b>El Doctorcito</b> خوردیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۱۳ نوامبر — Cancún و فرودگاه <span class="status-pill status-changed">موزه به روز آخر اضافه شد</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul>
+        <li>صبح آرام در Playa del Carmen</li><li>ناهار</li><li>سوخت‌گیری، تحویل خودرو و فرودگاه Cancún</li>
+      </ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul>
+        <li><b>Museo Maya de Cancún</b> را بازدید کردیم.</li><li>از سوپرمارکت خرید کردیم.</li><li>بنزین زدیم و سپس به فرودگاه رفتیم.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="compare-day">
+    <h3>۱۴ نوامبر — Frankfurt → Berlin <span class="status-pill status-unknown">ثبت جزئیات اجرای واقعی نشده</span></h3>
+    <div class="compare-grid">
+      <div class="compare-col planned"><h4>برنامه اولیه</h4><ul><li>ورود به Frankfurt و ادامه مسیر به Berlin.</li></ul></div>
+      <div class="compare-col actual"><h4>انجام‌شده</h4><ul><li>جزئیات این بخش در گزارش روزبه‌روز ثبت نشده است.</li></ul></div>
+    </div>
+  </article>
+</section>
 
 <section id="money" class="card">
   <h2>پول، پزو و انعام</h2>
@@ -474,7 +635,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <tr><td class="es">No me siento bien.</td><td class="pron">نو مِه سیِنتو بیِن</td><td>حالم خوب نیست.</td><td><button class="copy" data-copy="No me siento bien.">کپی</button></td></tr>
 </tbody></table></div></section>
 
-<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۲ نوامبر ۲۰۲۶ · نسخه کامل سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
+<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۱۳ نوامبر ۲۰۲۶ · برنامه اولیه + ثبت اجرای واقعی سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
