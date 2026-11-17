@@ -40,7 +40,8 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 .status-pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:.8rem;font-weight:700;margin-right:6px}
 .status-done{background:#dcfce7;color:#166534}.status-partial{background:#fef3c7;color:#92400e}.status-changed{background:#dbeafe;color:#1e40af}.status-skip{background:#fee2e2;color:#991b1b}.status-unknown{background:#e5e7eb;color:#374151}
 @media(prefers-color-scheme:dark){.status-done{background:#15351f;color:#86efac}.status-partial{background:#3b2e12;color:#fcd34d}.status-changed{background:#172554;color:#93c5fd}.status-skip{background:#3b1717;color:#fca5a5}.status-unknown{background:#30343a;color:#d1d5db}}
-@media(max-width:800px){.compare-grid{grid-template-columns:1fr}}.weather-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.money-grid,.plan-grid,.local-fields{grid-template-columns:1fr}.money-row{grid-template-columns:1fr 1fr}.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.expense-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.expense-summary{border:1px solid var(--line);border-radius:14px;padding:15px;background:var(--soft)}.expense-total{font-size:2rem;font-weight:900;color:var(--a);margin:4px 0}.expense-list{display:grid;grid-template-columns:1fr auto;gap:7px 12px;align-items:center}.expense-list div{padding:5px 0;border-bottom:1px solid var(--line)}.expense-list div:nth-last-child(-n+2){border-bottom:0}.note-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.travel-note{border:1px solid var(--line);border-radius:13px;padding:13px;background:var(--card)}.travel-note h3{margin:0 0 7px}.travel-note ul{margin:0;padding-right:20px}.draft-tag{display:inline-block;background:var(--warn);border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:.8rem;font-weight:700;margin-right:6px}
+@media(max-width:800px){.expense-grid,.note-grid{grid-template-columns:1fr}.compare-grid{grid-template-columns:1fr}.weather-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.money-grid,.plan-grid,.local-fields{grid-template-columns:1fr}.money-row{grid-template-columns:1fr 1fr}.map-shell{grid-template-columns:1fr}#tripMap{height:410px}.map-list{max-height:220px}.num-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.wrap{padding:11px}.hero{padding:20px}}
 @media(max-width:380px){.num-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.signs{grid-template-columns:1fr}}
 @media print{nav,.copy,#phraseSearch,.action{display:none!important}.card,.hero{break-inside:avoid}.hero{background:#fff;color:#000;border:2px solid #000}}
@@ -52,7 +53,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   <p>۳ تا ۱۴ نوامبر ۲۰۲۶ · برنامه روزبه‌روز + اسپانیایی کاربردی</p>
   <div class="route">Cancún → Holbox → Valladolid → Chichén Itzá → Izamal → Mérida → Uxmal → Bacalar → Tulum → Playa del Carmen → Cancún</div><div class="lang"><a class="active" href="mexico-itinerary.html">فارسی</a><a href="mexico-itinerary-en.html">English</a></div>
 </header>
-<nav><a href="#overview">خلاصه</a><a href="#today">امروز</a><a href="#weather">هوا</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#actual">واقعاً انجام شد</a><a href="#money">پول</a><a href="#rain">Plan B</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
+<nav><a href="#overview">خلاصه</a><a href="#today">امروز</a><a href="#weather">هوا</a><a href="#map">نقشه</a><a href="#days">روزبه‌روز</a><a href="#actual">واقعاً انجام شد</a><a href="#expenses">هزینه‌ها</a><a href="#notes">یادداشت‌ها</a><a href="#money">پول</a><a href="#rain">Plan B</a><a href="#todo">قبل از سفر</a><a href="#spanish">اسپانیایی</a><a href="#numbers">اعداد</a><a href="#emergency">اضطراری</a></nav>
 
 <section id="overview" class="card">
 <h2>خلاصه</h2>
@@ -383,6 +384,67 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   </article>
 </section>
 
+
+<section id="expenses" class="card">
+  <h2>هزینه‌های سفر <span class="draft-tag">در حال تکمیل</span></h2>
+  <div class="expense-grid">
+    <div class="expense-summary">
+      <div class="small">جمع پاک‌سازی‌شده ثبت‌شده تا این مرحله</div>
+      <div class="expense-total">€1,322.74</div>
+      <p class="small">این عدد پس از حذف تراکنش‌های غیرمرتبط، انتقال‌های شخصی و مبالغ گردشدن/RevPoints محاسبه شده است. با اضافه‌شدن رسیدهای باقی‌مانده ممکن است بعداً اصلاح شود.</p>
+    </div>
+    <div class="expense-summary">
+      <div class="expense-list">
+        <div>حمل‌ونقل، خودرو و سوخت</div><div><b>€355.83</b></div>
+        <div>رستوران و کافه</div><div><b>€252.58</b></div>
+        <div>سوپرمارکت و خوراکی</div><div><b>€195.54</b></div>
+        <div>بازدید، تور و ورودی</div><div><b>€161.09</b></div>
+        <div>خرید</div><div><b>€33.83</b></div>
+        <div>سلامت / دارو</div><div><b>€10.66</b></div>
+        <div>هزینه‌های مرتبط با هتل</div><div><b>€4.84</b></div>
+        <div>کارمزدها</div><div><b>€4.97</b></div>
+        <div>نامشخص / نیازمند دسته‌بندی</div><div><b>€152.14</b></div>
+        <div>برداشت نقدی</div><div><b>€151.26</b></div>
+      </div>
+    </div>
+  </div>
+  <p class="small">هزینه‌های بسته اصلی سفر/پرواز و اقامت در این جمع هزینه‌های جاری سفر ادغام نشده‌اند مگر جایی که جداگانه در تراکنش‌ها ثبت شده باشند. این بخش را بعداً با رسیدها و هزینه‌های نقدی کامل‌تر می‌کنیم.</p>
+</section>
+
+<section id="notes" class="card">
+  <h2>یادداشت‌های سفر <span class="draft-tag">در حال تکمیل</span></h2>
+  <div class="note-grid">
+    <div class="travel-note"><h3>Holbox</h3><ul>
+      <li>خیابان‌ها آسفالت نیستند و پستی‌وبلندی زیادی دارند.</li>
+      <li>وسیله‌های نقلیه حال‌وهوای خاص جزیره دارند و خودروهای معمولی کم‌اند.</li>
+      <li>طبیعت و ساحل‌ها بکر و جذاب بودند؛ نقاشی‌های دیواری هم بسیار چشمگیر بود.</li>
+      <li>کرایه دوچرخه تجربه خیلی خوبی بود.</li>
+      <li>Zumba در میدان اصلی، کافه‌ها، رستوران‌ها و بوتیک‌های شیک بخشی از فضای جزیره بودند.</li>
+      <li>مشکلات آب و برق در کنار ظاهر گردشگری و مرتب جزیره جالب بود.</li>
+    </ul></div>
+    <div class="travel-note"><h3>جاده و رانندگی</h3><ul>
+      <li>بعضی جاده‌ها و بزرگراه‌ها عوارض داشتند و ایست‌های بازرسی هم دیدیم.</li>
+      <li>پوشش اینترنت در جاده‌ها ضعیف بود و در بخش‌هایی عملاً اینترنت نداشتیم.</li>
+      <li>تریلی‌های دماغ‌دار آمریکایی زیاد به چشم می‌خوردند.</li>
+      <li>در مسیر آب نارگیل خنک و صنایع‌دستی کنار جاده خریدیم.</li>
+    </ul></div>
+    <div class="travel-note"><h3>خوراک و نوشیدنی</h3><ul>
+      <li>Horchata و Tamarindo از نوشیدنی‌های شاخص سفر بودند.</li>
+      <li>نان و شیرینی سوپرمارکت‌ها کیفیت خوبی داشتند.</li>
+      <li>در هوای گرم، نوشیدنی خنک خیلی بیشتر از معمول می‌چسبید.</li>
+      <li>انبه و موز آن‌قدر که انتظار داشتیم شیرین نبودند.</li>
+      <li>انواع تکیلا و مزکال را بهتر شناختیم.</li>
+    </ul></div>
+    <div class="travel-note"><h3>جزئیات فرهنگی و روزمره</h3><ul>
+      <li>برای اولین بار تفاوت علامت پزو و دلار را جدی‌تر متوجه شدیم.</li>
+      <li>پخش NFL و فوتبال آمریکایی در تلویزیون جلب توجه کرد.</li>
+      <li>حضور پررنگ زنان در فضای عمومی Holbox قابل توجه بود.</li>
+      <li>سگ‌های ولگرد، درهای دریچه‌دار Valladolid و جزئیات معماری شهرها از چیزهایی بودند که در ذهن ماندند.</li>
+    </ul></div>
+  </div>
+  <p class="small">این بخش عمداً خلاصه و باز است؛ نسخه کامل‌تر را با یادداشت‌های روزانه، تجربه غذاها، هتل‌ها، برخوردها و نکات فرهنگی تکمیل خواهیم کرد.</p>
+</section>
+
 <section id="money" class="card">
   <h2>پول، پزو و انعام</h2>
   <div class="money-grid">
@@ -635,7 +697,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <tr><td class="es">No me siento bien.</td><td class="pron">نو مِه سیِنتو بیِن</td><td>حالم خوب نیست.</td><td><button class="copy" data-copy="No me siento bien.">کپی</button></td></tr>
 </tbody></table></div></section>
 
-<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۱۳ نوامبر ۲۰۲۶ · برنامه اولیه + ثبت اجرای واقعی سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
+<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۱۷ نوامبر ۲۰۲۶ · برنامه اولیه + اجرای واقعی + هزینه‌ها و یادداشت‌های سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
