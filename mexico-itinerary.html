@@ -4,17 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <title>برنامه سفر مکزیک | ۳ تا ۱۴ نوامبر ۲۰۲۶</title>
 <style>
 :root{--bg:#f6f4ef;--card:#fffdf8;--text:#1f2933;--muted:#667085;--line:#e7e1d7;--a:#0f766e;--soft:#e7f5f2;--warn:#fff4db}
 @media(prefers-color-scheme:dark){:root{--bg:#151816;--card:#1e2320;--text:#eef4ef;--muted:#aab4ad;--line:#343a36;--a:#5eead4;--soft:#163a35;--warn:#3b3118}}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;line-height:1.75}a{color:var(--a)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,Arial,sans-serif;line-height:1.75}a{color:var(--a)}
 .wrap{max-width:980px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,#0f766e,#134e4a);color:#fff;padding:28px;border-radius:24px;margin:10px 0 18px}.hero h1{margin:0;font-size:clamp(1.8rem,5vw,3rem)}.route{direction:ltr;text-align:left;font-weight:700;margin-top:12px}.lang{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.lang a{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.45);padding:5px 10px;border-radius:999px}.lang a.active{background:#fff;color:#134e4a}
 nav{position:sticky;top:0;z-index:9;background:var(--bg);padding:9px 0;overflow:auto;white-space:nowrap;border-bottom:1px solid var(--line)}nav a{display:inline-block;margin-left:7px;padding:6px 10px;background:var(--card);border:1px solid var(--line);border-radius:999px;text-decoration:none}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0}.notice{background:var(--warn);padding:12px 14px;border-radius:12px;border-right:4px solid #d97706}.privacy{background:var(--soft);padding:12px 14px;border-radius:12px;border-right:4px solid var(--a)}
 .day{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.day:first-of-type{border-top:0;padding-top:0}.day h3{margin-bottom:6px}.timeline{list-style:none;padding:0}.timeline li{padding:4px 0}.time{direction:ltr;display:inline-block;min-width:94px;color:var(--a);font-weight:800;text-align:left;margin-left:8px}
-.small{color:var(--muted);font-size:.9rem}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:10px 0 18px}table{width:100%;min-width:690px;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th{background:var(--soft)}tr:last-child td{border-bottom:0}.es{direction:ltr;text-align:left;font-family:Arial,sans-serif;font-weight:700}.pron{color:var(--muted)}
+.small{color:var(--muted);font-size:.9rem}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:10px 0 18px}table{width:100%;min-width:690px;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th{background:var(--soft)}tr:last-child td{border-bottom:0}.es{direction:ltr;text-align:left;font-family:Vazirmatn,Arial,sans-serif;font-weight:700}.pron{color:var(--muted)}
 input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:1rem}.copy,.action{border:1px solid var(--line);background:var(--soft);color:var(--text);padding:6px 9px;border-radius:9px;cursor:pointer}.checks label{display:block;margin:9px 0}
 .map-shell{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px;align-items:start}
 #tripMap{height:520px;border:1px solid var(--line);border-radius:14px;overflow:hidden;direction:ltr;background:var(--soft)}
@@ -702,6 +705,60 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+const FA_DIGITS='۰۱۲۳۴۵۶۷۸۹';
+const EN_DIGITS='0123456789';
+function toFaDigits(value){
+  return String(value)
+    .replace(/[0-9]/g,d=>FA_DIGITS[Number(d)])
+    .replace(/([۰-۹])\.([۰-۹])/g,'$1٫$2')
+    .replace(/([۰-۹]),(?=[۰-۹]{3}(?:\D|$))/g,'$1٬');
+}
+function fromFaDigits(value){
+  return String(value)
+    .replace(/[۰-۹]/g,d=>EN_DIGITS[FA_DIGITS.indexOf(d)])
+    .replace(/٫/g,'.')
+    .replace(/٬/g,'');
+}
+function persianizeText(root=document.body){
+  if(!root)return;
+  const skip=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA']);
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+    acceptNode(node){
+      const p=node.parentElement;
+      if(!p||skip.has(p.tagName))return NodeFilter.FILTER_REJECT;
+      return /[0-9]/.test(node.nodeValue||'')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }
+  });
+  const nodes=[];
+  while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(n=>{const v=toFaDigits(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});
+}
+function persianizeMoneyInputs(){
+  ['fxRate','eurAmount','mxnAmount','billAmount'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&/[0-9]/.test(el.value))el.value=toFaDigits(el.value);
+  });
+}
+function startPersianDigitObserver(){
+  persianizeText();
+  persianizeMoneyInputs();
+  const obs=new MutationObserver(muts=>{
+    muts.forEach(m=>{
+      if(m.type==='characterData'&&m.target?.nodeValue&&/[0-9]/.test(m.target.nodeValue)){
+        const v=toFaDigits(m.target.nodeValue);if(v!==m.target.nodeValue)m.target.nodeValue=v;
+      }
+      m.addedNodes?.forEach(n=>{
+        if(n.nodeType===Node.TEXT_NODE&&/[0-9]/.test(n.nodeValue||'')){
+          const v=toFaDigits(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;
+        }else if(n.nodeType===Node.ELEMENT_NODE){
+          persianizeText(n);
+        }
+      });
+    });
+  });
+  obs.observe(document.body,{subtree:true,childList:true,characterData:true});
+}
+
 const mapPoints=[
  {name:'Cancún',day:'3',lat:21.1619,lng:-86.8515,note:'ورود و شب اول'},
  {name:'Chiquilá',day:'4',lat:21.4327,lng:-87.3352,note:'پارک خودرو و فری'},
@@ -843,10 +900,10 @@ renderToday();
 
 async function loadFx(){
  const rate=document.getElementById('fxRate'),status=document.getElementById('fxStatus');if(!rate)return;
- try{const r=await fetch('https://api.frankfurter.app/latest?from=EUR&to=MXN');if(!r.ok)throw new Error('fx');const j=await r.json();if(j.rates&&j.rates.MXN){rate.value=Number(j.rates.MXN).toFixed(2);status.textContent='نرخ آنلاین برای '+(j.date||'امروز')+' دریافت شد.';calcFx()}}
+ try{const r=await fetch('https://api.frankfurter.app/latest?from=EUR&to=MXN');if(!r.ok)throw new Error('fx');const j=await r.json();if(j.rates&&j.rates.MXN){rate.value=toFaDigits(Number(j.rates.MXN).toFixed(2));status.textContent='نرخ آنلاین برای '+(j.date||'امروز')+' دریافت شد.';calcFx()}}
  catch(e){status.textContent='نرخ آنلاین در دسترس نیست؛ نرخ را دستی وارد کنید.'}
 }
-function nval(id){const x=parseFloat(String(document.getElementById(id)?.value||'').replace(',','.'));return Number.isFinite(x)?x:0}
+function nval(id){const x=parseFloat(fromFaDigits(String(document.getElementById(id)?.value||'')).replace(',','.'));return Number.isFinite(x)?x:0}
 function calcFx(){const r=nval('fxRate'),eur=nval('eurAmount'),mxn=nval('mxnAmount');document.getElementById('mxnResult').textContent='≈ '+(eur*r).toFixed(0)+' MXN';document.getElementById('eurResult').textContent=r>0?'≈ '+(mxn/r).toFixed(2)+' EUR':'—'}
 ['fxRate','eurAmount','mxnAmount'].forEach(id=>document.getElementById(id)?.addEventListener('input',calcFx));
 document.querySelectorAll('[data-tip]').forEach(b=>b.addEventListener('click',()=>{const bill=nval('billAmount'),pct=Number(b.dataset.tip),tip=bill*pct/100;document.getElementById('tipResult').textContent='انعام '+pct+'٪ = '+tip.toFixed(0)+' MXN · جمع '+(bill+tip).toFixed(0)+' MXN'}));
@@ -854,5 +911,5 @@ document.getElementById('billAmount')?.addEventListener('input',()=>document.que
 
 document.querySelectorAll('[data-local-emg]').forEach(inp=>{const k='mx:emg:'+inp.dataset.localEmg;inp.value=localStorage.getItem(k)||'';inp.addEventListener('input',()=>localStorage.setItem(k,inp.value))});
 
-loadWeather(false);loadFx();calcFx();document.querySelector('[data-tip="10"]')?.click();
+startPersianDigitObserver();loadWeather(false);loadFx();calcFx();document.querySelector('[data-tip="10"]')?.click();
 </script></body></html>
