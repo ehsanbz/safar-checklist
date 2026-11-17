@@ -27,7 +27,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 .num-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 18px}.num{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--soft);text-align:center}.num b{display:block;font-size:1.15rem}.num .es{display:block;text-align:center;font-size:.95rem}.quick-phrase{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0 18px}.quick-display{font-size:1.45rem;font-weight:800;direction:ltr;text-align:center;padding:14px;background:var(--card);border-radius:10px;margin-bottom:10px}.quick-buttons{display:flex;gap:7px;flex-wrap:wrap}.quick-buttons button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:8px 11px;cursor:pointer}
 .signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sign{border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)}.sign b{display:block;direction:ltr;text-align:left}
 .today-card{border:2px solid var(--a);background:var(--soft)}.today-card h2{margin-bottom:6px}.today-label{display:inline-block;background:var(--a);color:#fff;border-radius:999px;padding:4px 10px;font-size:.85rem;font-weight:700}.today-day{outline:3px solid color-mix(in srgb,var(--a) 55%,transparent);outline-offset:4px;border-radius:12px}.today-actions,.route-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.route-actions a,.today-actions a{display:inline-block;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:7px 10px;border-radius:10px;text-decoration:none;font-size:.9rem}.day-weather{display:inline-flex;gap:6px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px 9px;margin:3px 0 8px;font-size:.86rem}
-.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}.weather-card .meta{font-size:.82rem;color:var(--muted)}
+.weather-modes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.weather-mode-btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:700}.weather-mode-btn.active{background:var(--a);color:#fff;border-color:var(--a)}.weather-panel[hidden]{display:none!important}.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}.weather-card .meta{font-size:.82rem;color:var(--muted)}
 .money-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.money-panel,.plan-card,.emg-local{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}.money-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}.money-panel label,.emg-local label{display:block;font-size:.88rem;color:var(--muted)}.money-panel input,.emg-local input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);font-size:1rem}.result{font-size:1.35rem;font-weight:800;color:var(--a);margin:8px 0}.tip-buttons{display:flex;gap:7px;flex-wrap:wrap}.tip-buttons button{border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:9px;padding:7px 10px;cursor:pointer}
 .plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-card h3{margin:0 0 6px}.plan-card p{margin:0}.emergency-number{font-size:2rem;font-weight:900;direction:ltr;text-align:center}.local-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.local-note{background:var(--soft);border-radius:10px;padding:10px;font-size:.88rem}.status{font-size:.88rem;color:var(--muted)}
 .compare-intro{background:var(--soft);border-right:4px solid var(--a);padding:12px 14px;border-radius:12px;margin-bottom:14px}
@@ -75,14 +75,28 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 </section>
 
 <section id="weather" class="card">
-  <h2>هوا برای روزهای سفر</h2>
-  <p>پیش‌بینی از Open-Meteo بارگیری می‌شود. اگر احتمال بارش بالا باشد، کارت همان روز علامت می‌خورد و بخش Plan B را ببینید.</p>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-    <button id="refreshWeather" type="button" class="action">به‌روزرسانی هوا</button>
-    <span id="weatherStatus" class="status">هنوز بارگیری نشده</span>
+  <h2>وضعیت آب‌وهوا</h2>
+  <div class="weather-modes" role="tablist" aria-label="حالت نمایش آب‌وهوا">
+    <button id="weatherModeForecast" class="weather-mode-btn active" type="button" role="tab" aria-selected="true">پیش‌بینی / قابل به‌روزرسانی</button>
+    <button id="weatherModeActual" class="weather-mode-btn" type="button" role="tab" aria-selected="false">آنچه واقعاً رخ داد</button>
   </div>
-  <div id="weatherGrid" class="weather-grid"></div>
-  <p class="small">منبع: Open-Meteo. پیش‌بینی هوا ممکن است تغییر کند؛ برای فعالیت‌های قایق و فری، تصمیم نهایی را نزدیک زمان اجرا بگیرید.</p>
+
+  <div id="forecastWeatherPanel" class="weather-panel">
+    <p>پیش‌بینی از Open-Meteo بارگیری می‌شود. اگر احتمال بارش بالا باشد، کارت همان روز علامت می‌خورد و بخش Plan B را ببینید.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      <button id="refreshWeather" type="button" class="action">به‌روزرسانی پیش‌بینی</button>
+      <span id="weatherStatus" class="status">هنوز بارگیری نشده</span>
+    </div>
+    <div id="weatherGrid" class="weather-grid"></div>
+    <p class="small">این بخش برای پیش‌بینی/نمایش قابل‌به‌روزرسانی باقی می‌ماند.</p>
+  </div>
+
+  <div id="actualWeatherPanel" class="weather-panel" hidden>
+    <p>این بخش وضعیت همان روز را از داده تاریخی Open-Meteo نشان می‌دهد: بیشینه و کمینه دما، مجموع بارش و بیشینه سرعت باد.</p>
+    <div id="historicalWeatherStatus" class="status">در حال بارگیری داده تاریخی…</div>
+    <div id="historicalWeatherGrid" class="weather-grid" style="margin-top:10px"></div>
+    <p class="small">منبع: Open-Meteo Historical Weather. این داده‌ها بازسازی تاریخی (reanalysis) بر پایه مشاهدات و مدل‌های هواشناسی‌اند؛ بنابراین معادل گزارش یک ایستگاه هواشناسی دقیق در همان نقطه نیستند.</p>
+  </div>
 </section>
 
 <section id="map" class="card">
@@ -864,6 +878,57 @@ function renderWeather(){
  renderToday();
 }
 document.getElementById('refreshWeather')?.addEventListener('click',()=>loadWeather(true));
+const historicalWxByDate={};
+function weatherLabelFa(code){
+ if(code===0)return 'صاف';
+ if([1,2].includes(code))return 'کمی تا نیمه‌ابری';
+ if(code===3)return 'ابری';
+ if([45,48].includes(code))return 'مه';
+ if(code>=51&&code<=57)return 'نم‌نم باران';
+ if(code>=61&&code<=67)return 'باران';
+ if(code>=71&&code<=77)return 'برف';
+ if(code>=80&&code<=82)return 'رگبار';
+ if(code>=95)return 'رعدوبرق';
+ return 'وضعیت ثبت‌شده';
+}
+async function loadHistoricalWeather(){
+ const status=document.getElementById('historicalWeatherStatus'),grid=document.getElementById('historicalWeatherGrid');
+ if(!status||!grid)return;
+ status.textContent='در حال بارگیری داده تاریخی…'; grid.innerHTML='';
+ const groups={};
+ weatherDays.forEach(d=>{const key=d.city+'|'+d.lat+'|'+d.lng;(groups[key]||(groups[key]={...d,dates:[]})).dates.push(d.date)});
+ const results={};
+ try{
+  await Promise.all(Object.values(groups).map(async g=>{
+   const dates=g.dates.slice().sort(),start=dates[0],end=dates.at(-1);
+   const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=auto&start_date='+start+'&end_date='+end;
+   const r=await fetch(url); if(!r.ok)throw new Error('historical '+r.status); const j=await r.json();
+   (j.daily?.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code?.[i],max:j.daily.temperature_2m_max?.[i],min:j.daily.temperature_2m_min?.[i],precip:j.daily.precipitation_sum?.[i],wind:j.daily.wind_speed_10m_max?.[i]};});
+  }));
+  Object.assign(historicalWxByDate,results);
+  weatherDays.forEach(d=>{
+    const w=historicalWxByDate[d.date],el=document.createElement('div'); el.className='weather-card'; const day=Number(d.date.slice(-2));
+    if(w){
+      el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="wx">'+weatherIcon(w.code)+' '+weatherLabelFa(w.code)+'</div><div>بیشینه/کمینه: '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div>بارش: '+Number(w.precip||0).toFixed(1)+' mm</div><div>بیشینه باد: '+Math.round(w.wind||0)+' km/h</div>';
+    } else el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="meta">داده تاریخی موجود نیست</div>';
+    grid.appendChild(el);
+  });
+  status.textContent='داده تاریخی بارگیری شد';
+ }catch(e){
+  status.textContent='بارگیری داده تاریخی ممکن نشد.'; grid.innerHTML='<div class="notice">داده تاریخی فعلاً در دسترس نیست.</div>';
+ }
+}
+function setWeatherMode(mode){
+ const forecast=mode==='forecast';
+ document.getElementById('forecastWeatherPanel').hidden=!forecast;
+ document.getElementById('actualWeatherPanel').hidden=forecast;
+ const a=document.getElementById('weatherModeForecast'),b=document.getElementById('weatherModeActual');
+ a.classList.toggle('active',forecast); b.classList.toggle('active',!forecast);
+ a.setAttribute('aria-selected',String(forecast)); b.setAttribute('aria-selected',String(!forecast));
+}
+document.getElementById('weatherModeForecast')?.addEventListener('click',()=>setWeatherMode('forecast'));
+document.getElementById('weatherModeActual')?.addEventListener('click',()=>setWeatherMode('actual'));
+loadHistoricalWeather();
 
 const routeByDate={
  '2026-11-04':[['Cancún','Chiquilá']],
