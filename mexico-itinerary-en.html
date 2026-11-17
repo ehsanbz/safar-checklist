@@ -20,7 +20,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 .num-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 18px}.num{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--soft);text-align:center}.num b{display:block;font-size:1.15rem}.quick-phrase{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0 18px}.quick-display{font-size:1.45rem;font-weight:800;text-align:center;padding:14px;background:var(--card);border-radius:10px;margin-bottom:10px}.quick-buttons{display:flex;gap:7px;flex-wrap:wrap}.quick-buttons button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:8px 11px;cursor:pointer}
 .signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sign{border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)}.sign b{display:block}
 .today-card{border:2px solid var(--a);background:var(--soft)}.today-label{display:inline-block;background:var(--a);color:#fff;border-radius:999px;padding:4px 10px;font-size:.85rem;font-weight:700}.today-day{outline:3px solid color-mix(in srgb,var(--a) 55%,transparent);outline-offset:4px;border-radius:12px}.today-actions,.route-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.route-actions a,.today-actions a{display:inline-block;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:7px 10px;border-radius:10px;text-decoration:none;font-size:.9rem}.day-weather{display:inline-flex;gap:6px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px 9px;margin:3px 0 8px;font-size:.86rem}
-.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}
+.weather-modes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.weather-mode-btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:700}.weather-mode-btn.active{background:var(--a);color:#fff;border-color:var(--a)}.weather-panel[hidden]{display:none!important}.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}
 .money-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.money-panel,.plan-card,.emg-local{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}.money-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}.money-panel label,.emg-local label{display:block;font-size:.88rem;color:var(--muted)}.money-panel input,.emg-local input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);font-size:1rem}.result{font-size:1.35rem;font-weight:800;color:var(--a);margin:8px 0}.tip-buttons{display:flex;gap:7px;flex-wrap:wrap}.tip-buttons button{border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:9px;padding:7px 10px;cursor:pointer}
 .plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-card h3{margin:0 0 6px}.plan-card p{margin:0}.emergency-number{font-size:2rem;font-weight:900;text-align:center}.local-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.local-note{background:var(--soft);border-radius:10px;padding:10px;font-size:.88rem}
 .compare-intro{background:var(--soft);border-left:4px solid var(--a);padding:12px 14px;border-radius:12px;margin-bottom:14px}.compare-day{border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0;background:var(--card)}.compare-day h3{margin:0 0 10px}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare-col{border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}.compare-col.planned{background:color-mix(in srgb,var(--soft) 55%,var(--card))}.compare-col h4{margin:0 0 8px}.compare-col ul{margin:0;padding-left:19px}.status-pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:.8rem;font-weight:700;margin-left:6px}.status-done{background:#dcfce7;color:#166534}.status-partial{background:#fef3c7;color:#92400e}.status-changed{background:#dbeafe;color:#1e40af}.status-skip{background:#fee2e2;color:#991b1b}.status-unknown{background:#e5e7eb;color:#374151}
@@ -51,9 +51,23 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <section id="today" class="card today-card"><span class="today-label">Today mode</span><h2 id="todayTitle">Today's plan</h2><div id="todayContent">Checking the trip date…</div><div id="todayWeather" class="status"></div></section>
 
 <section id="weather" class="card">
-<h2>Weather during the trip</h2><p>Forecasts are loaded from Open-Meteo. High rain probability is highlighted; use the Plan B section when needed.</p>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button id="refreshWeather" type="button" class="action">Refresh weather</button><span id="weatherStatus" class="status">Not loaded yet</span></div>
-<div id="weatherGrid" class="weather-grid"></div><p class="small">Source: Open-Meteo. Forecasts can change; for boats and ferries, make the final call close to departure.</p>
+<h2>Weather</h2>
+<div class="weather-modes" role="tablist" aria-label="Weather display mode">
+  <button id="weatherModeForecast" class="weather-mode-btn active" type="button" role="tab" aria-selected="true">Forecast / refreshable</button>
+  <button id="weatherModeActual" class="weather-mode-btn" type="button" role="tab" aria-selected="false">What actually happened</button>
+</div>
+<div id="forecastWeatherPanel" class="weather-panel">
+  <p>Forecasts are loaded from Open-Meteo. High rain probability is highlighted; use the Plan B section when needed.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button id="refreshWeather" type="button" class="action">Refresh forecast</button><span id="weatherStatus" class="status">Not loaded yet</span></div>
+  <div id="weatherGrid" class="weather-grid"></div>
+  <p class="small">This remains the refreshable forecast view.</p>
+</div>
+<div id="actualWeatherPanel" class="weather-panel" hidden>
+  <p>This view shows the historical conditions for each travel day: daily high/low, precipitation total and maximum wind speed.</p>
+  <div id="historicalWeatherStatus" class="status">Loading historical weather…</div>
+  <div id="historicalWeatherGrid" class="weather-grid" style="margin-top:10px"></div>
+  <p class="small">Source: Open-Meteo Historical Weather. These are historical reanalysis data based on observations and weather models, not an exact reading from a weather station at each attraction.</p>
+</div>
 </section>
 
 <section id="map" class="card">
@@ -251,6 +265,57 @@ function weatherIcon(c){if(c===0)return'☀️';if([1,2].includes(c))return'🌤
 async function loadWeather(force=false){const status=document.getElementById('weatherStatus'),grid=document.getElementById('weatherGrid');const ck='mx:weather:v2',now=Date.now();if(!force){try{const cache=JSON.parse(localStorage.getItem(ck)||'null');if(cache&&now-cache.ts<1800000){wxByDate=cache.data;renderWeather();status.textContent='Cached less than 30 minutes ago';return}}catch(e){}}status.textContent='Loading forecast…';const groups={};weatherDays.forEach(d=>{const k=d.city+'|'+d.lat+'|'+d.lng;(groups[k]||(groups[k]={...d,dates:[]})).dates.push(d.date)});const results={};try{await Promise.all(Object.values(groups).map(async g=>{const ds=g.dates.slice().sort(),url='https://api.open-meteo.com/v1/forecast?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date='+ds[0]+'&end_date='+ds.at(-1);const r=await fetch(url),j=await r.json();(j.daily.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_probability_max[i]}})}));wxByDate=results;localStorage.setItem(ck,JSON.stringify({ts:now,data:results}));renderWeather();status.textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}catch(e){status.textContent='Weather could not be loaded.';grid.innerHTML='<div class="notice">Online forecast unavailable. The itinerary still works.</div>'}}
 function renderWeather(){const grid=document.getElementById('weatherGrid');grid.innerHTML='';weatherDays.forEach(d=>{const w=wxByDate[d.date],el=document.createElement('div');el.className='weather-card';const day=Number(d.date.slice(-2));el.innerHTML=w?'<b>'+day+' Nov · '+d.city+'</b><div class="wx">'+weatherIcon(w.code)+' '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div class="'+(w.rain>=50?'rain-high':'')+'">Rain '+Math.round(w.rain||0)+'%</div>':'<b>'+day+' Nov · '+d.city+'</b><div>No data</div>';grid.appendChild(el);const art=document.querySelector('.day[data-date="'+d.date+'"]');if(art){let badge=art.querySelector('.day-weather');if(!badge){badge=document.createElement('div');badge.className='day-weather';art.querySelector('h3').insertAdjacentElement('afterend',badge)}badge.textContent=w?weatherIcon(w.code)+' '+Math.round(w.max)+'°/'+Math.round(w.min)+'° · rain '+Math.round(w.rain||0)+'%':'Weather: —'}});renderToday()}
 document.getElementById('refreshWeather').addEventListener('click',()=>loadWeather(true));
+const historicalWxByDate={};
+function weatherLabelEn(code){
+ if(code===0)return 'Clear';
+ if([1,2].includes(code))return 'Partly cloudy';
+ if(code===3)return 'Overcast';
+ if([45,48].includes(code))return 'Fog';
+ if(code>=51&&code<=57)return 'Drizzle';
+ if(code>=61&&code<=67)return 'Rain';
+ if(code>=71&&code<=77)return 'Snow';
+ if(code>=80&&code<=82)return 'Showers';
+ if(code>=95)return 'Thunderstorm';
+ return 'Recorded conditions';
+}
+async function loadHistoricalWeather(){
+ const status=document.getElementById('historicalWeatherStatus'),grid=document.getElementById('historicalWeatherGrid');
+ if(!status||!grid)return;
+ status.textContent='Loading historical weather…'; grid.innerHTML='';
+ const groups={};
+ weatherDays.forEach(d=>{const key=d.city+'|'+d.lat+'|'+d.lng;(groups[key]||(groups[key]={...d,dates:[]})).dates.push(d.date)});
+ const results={};
+ try{
+  await Promise.all(Object.values(groups).map(async g=>{
+   const dates=g.dates.slice().sort(),start=dates[0],end=dates.at(-1);
+   const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=auto&start_date='+start+'&end_date='+end;
+   const r=await fetch(url); if(!r.ok)throw new Error('historical '+r.status); const j=await r.json();
+   (j.daily?.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code?.[i],max:j.daily.temperature_2m_max?.[i],min:j.daily.temperature_2m_min?.[i],precip:j.daily.precipitation_sum?.[i],wind:j.daily.wind_speed_10m_max?.[i]};});
+  }));
+  Object.assign(historicalWxByDate,results);
+  weatherDays.forEach(d=>{
+    const w=historicalWxByDate[d.date],el=document.createElement('div'); el.className='weather-card'; const day=Number(d.date.slice(-2));
+    if(w){
+      el.innerHTML='<b>'+day+' Nov · '+d.city+'</b><div class="wx">'+weatherIcon(w.code)+' '+weatherLabelEn(w.code)+'</div><div>High/low: '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div>Precipitation: '+Number(w.precip||0).toFixed(1)+' mm</div><div>Max wind: '+Math.round(w.wind||0)+' km/h</div>';
+    } else el.innerHTML='<b>'+day+' Nov · '+d.city+'</b><div class="meta">No historical data</div>';
+    grid.appendChild(el);
+  });
+  status.textContent='Historical weather loaded';
+ }catch(e){
+  status.textContent='Historical weather could not be loaded.'; grid.innerHTML='<div class="notice">Historical weather is currently unavailable.</div>';
+ }
+}
+function setWeatherMode(mode){
+ const forecast=mode==='forecast';
+ document.getElementById('forecastWeatherPanel').hidden=!forecast;
+ document.getElementById('actualWeatherPanel').hidden=forecast;
+ const a=document.getElementById('weatherModeForecast'),b=document.getElementById('weatherModeActual');
+ a.classList.toggle('active',forecast); b.classList.toggle('active',!forecast);
+ a.setAttribute('aria-selected',String(forecast)); b.setAttribute('aria-selected',String(!forecast));
+}
+document.getElementById('weatherModeForecast')?.addEventListener('click',()=>setWeatherMode('forecast'));
+document.getElementById('weatherModeActual')?.addEventListener('click',()=>setWeatherMode('actual'));
+loadHistoricalWeather();
 
 const routeByDate={'2026-11-04':[['Cancún','Chiquilá']],'2026-11-06':[['Chiquilá','Valladolid, Yucatán']],'2026-11-07':[['Valladolid, Yucatán','Chichén Itzá'],['Chichén Itzá','Mérida, Yucatán']],'2026-11-08':[['Mérida, Yucatán','Uxmal']],'2026-11-09':[['Mérida, Yucatán','Izamal'],['Izamal','Bacalar']],'2026-11-11':[['Bacalar','Tulum Archaeological Zone'],['Tulum Archaeological Zone','Playa del Carmen']],'2026-11-13':[['Playa del Carmen','Museo Maya de Cancún'],['Museo Maya de Cancún','Cancún International Airport']]};
 function dirUrl(a,b){return'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b)+'&travelmode=driving'}
