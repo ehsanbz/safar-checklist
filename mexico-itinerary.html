@@ -92,10 +92,10 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   </div>
 
   <div id="actualWeatherPanel" class="weather-panel" hidden>
-    <p>این بخش وضعیت همان روز را از داده تاریخی Open-Meteo نشان می‌دهد: بیشینه و کمینه دما، مجموع بارش و بیشینه سرعت باد.</p>
+    <p>این بخش وضعیت غالب همان روز را از داده تاریخی Open-Meteo بازسازی می‌کند. معیار اصلی، نسبت ساعات آفتابی به روشنایی روز و تعداد ساعات بارش است؛ «شدیدترین کد روز» به‌تنهایی ملاک نیست.</p>
     <div id="historicalWeatherStatus" class="status">در حال بارگیری داده تاریخی…</div>
     <div id="historicalWeatherGrid" class="weather-grid" style="margin-top:10px"></div>
-    <p class="small">منبع: Open-Meteo Historical Weather. این داده‌ها بازسازی تاریخی (reanalysis) بر پایه مشاهدات و مدل‌های هواشناسی‌اند؛ بنابراین معادل گزارش یک ایستگاه هواشناسی دقیق در همان نقطه نیستند.</p>
+    <p class="small">منبع: Open-Meteo Historical Weather. کد روزانه Open-Meteo شدیدترین وضعیت رخ‌داده در روز را نشان می‌دهد؛ برای جلوگیری از نمایش گمراه‌کننده، این صفحه وضعیت غالب را از ساعات آفتابی و ساعات بارش محاسبه می‌کند. داده‌ها reanalysis هستند و الزاماً معادل یک ایستگاه دقیق در همان نقطه نیستند.</p>
   </div>
 </section>
 
@@ -891,6 +891,19 @@ function weatherLabelFa(code){
  if(code>=95)return 'رعدوبرق';
  return 'وضعیت ثبت‌شده';
 }
+function dominantWeatherFa(w){
+ const daylight=Number(w.daylight||0),sunshine=Number(w.sunshine||0),rainHours=Number(w.precipHours||0),rain=Number(w.precip||0);
+ const sunFrac=daylight>0?sunshine/daylight:0;
+ if(rainHours>=4 && sunFrac<0.35)return {label:'بارانی / عمدتاً ابری',icon:'🌧️'};
+ if(rainHours>=1 && sunFrac>=0.55)return {label:'عمدتاً آفتابی با رگبار کوتاه',icon:'🌦️'};
+ if(rainHours>=1 && sunFrac>=0.35)return {label:'آفتابی و ابری با رگبار',icon:'🌦️'};
+ if(rainHours>=1)return {label:'ابری با بارش پراکنده',icon:'🌧️'};
+ if(sunFrac>=0.65)return {label:'عمدتاً آفتابی',icon:'☀️'};
+ if(sunFrac>=0.45)return {label:'آفتابی و ابری',icon:'🌤️'};
+ if(sunFrac>=0.25)return {label:'نیمه‌ابری',icon:'⛅'};
+ return {label:'عمدتاً ابری',icon:'☁️'};
+}
+function hoursFa(seconds){return Number(seconds||0)/3600;}
 async function loadHistoricalWeather(){
  const status=document.getElementById('historicalWeatherStatus'),grid=document.getElementById('historicalWeatherGrid');
  if(!status||!grid)return;
@@ -901,15 +914,15 @@ async function loadHistoricalWeather(){
  try{
   await Promise.all(Object.values(groups).map(async g=>{
    const dates=g.dates.slice().sort(),start=dates[0],end=dates.at(-1);
-   const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=auto&start_date='+start+'&end_date='+end;
+   const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,daylight_duration,sunshine_duration,precipitation_sum,precipitation_hours,wind_speed_10m_max&timezone=auto&start_date='+start+'&end_date='+end;
    const r=await fetch(url); if(!r.ok)throw new Error('historical '+r.status); const j=await r.json();
-   (j.daily?.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code?.[i],max:j.daily.temperature_2m_max?.[i],min:j.daily.temperature_2m_min?.[i],precip:j.daily.precipitation_sum?.[i],wind:j.daily.wind_speed_10m_max?.[i]};});
+   (j.daily?.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code?.[i],max:j.daily.temperature_2m_max?.[i],min:j.daily.temperature_2m_min?.[i],daylight:j.daily.daylight_duration?.[i],sunshine:j.daily.sunshine_duration?.[i],precip:j.daily.precipitation_sum?.[i],precipHours:j.daily.precipitation_hours?.[i],wind:j.daily.wind_speed_10m_max?.[i]};});
   }));
   Object.assign(historicalWxByDate,results);
   weatherDays.forEach(d=>{
     const w=historicalWxByDate[d.date],el=document.createElement('div'); el.className='weather-card'; const day=Number(d.date.slice(-2));
     if(w){
-      el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="wx">'+weatherIcon(w.code)+' '+weatherLabelFa(w.code)+'</div><div>بیشینه/کمینه: '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div>بارش: '+Number(w.precip||0).toFixed(1)+' mm</div><div>بیشینه باد: '+Math.round(w.wind||0)+' km/h</div>';
+      const dom=dominantWeatherFa(w),sunH=hoursFa(w.sunshine),dayH=hoursFa(w.daylight); el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="wx">'+dom.icon+' '+dom.label+'</div><div>آفتاب: '+sunH.toFixed(1)+' از '+dayH.toFixed(1)+' ساعت روشنایی روز</div><div>بارش: '+Number(w.precip||0).toFixed(1)+' mm · '+Number(w.precipHours||0).toFixed(0)+' ساعت بارش</div><div>بیشینه/کمینه: '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div>بیشینه باد: '+Math.round(w.wind||0)+' km/h</div>';
     } else el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="meta">داده تاریخی موجود نیست</div>';
     grid.appendChild(el);
   });
