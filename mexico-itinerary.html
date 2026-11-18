@@ -27,7 +27,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 .num-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 18px}.num{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--soft);text-align:center}.num b{display:block;font-size:1.15rem}.num .es{display:block;text-align:center;font-size:.95rem}.quick-phrase{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0 18px}.quick-display{font-size:1.45rem;font-weight:800;direction:ltr;text-align:center;padding:14px;background:var(--card);border-radius:10px;margin-bottom:10px}.quick-buttons{display:flex;gap:7px;flex-wrap:wrap}.quick-buttons button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:8px 11px;cursor:pointer}
 .signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sign{border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)}.sign b{display:block;direction:ltr;text-align:left}
 .today-card{border:2px solid var(--a);background:var(--soft)}.today-card h2{margin-bottom:6px}.today-label{display:inline-block;background:var(--a);color:#fff;border-radius:999px;padding:4px 10px;font-size:.85rem;font-weight:700}.today-day{outline:3px solid color-mix(in srgb,var(--a) 55%,transparent);outline-offset:4px;border-radius:12px}.today-actions,.route-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.route-actions a,.today-actions a{display:inline-block;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:7px 10px;border-radius:10px;text-decoration:none;font-size:.9rem}.day-weather{display:inline-flex;gap:6px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px 9px;margin:3px 0 8px;font-size:.86rem}
-.weather-modes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.weather-mode-btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:700}.weather-mode-btn.active{background:var(--a);color:#fff;border-color:var(--a)}.weather-panel[hidden]{display:none!important}.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}.weather-card .meta{font-size:.82rem;color:var(--muted)}
+.weather-modes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.weather-mode-btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:700}.weather-mode-btn.active{background:var(--a);color:#fff;border-color:var(--a)}.weather-panel[hidden]{display:none!important}.weather-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.weather-card{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card)}.weather-card b{display:block}.weather-card .wx{font-size:1.35rem}.weather-card .rain-high{color:#b45309;font-weight:700}.weather-card .meta{font-size:.82rem;color:var(--muted)}.weather-sources{line-height:1.9}.weather-sources a{white-space:nowrap}
 .money-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.money-panel,.plan-card,.emg-local{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}.money-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}.money-panel label,.emg-local label{display:block;font-size:.88rem;color:var(--muted)}.money-panel input,.emg-local input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);font-size:1rem}.result{font-size:1.35rem;font-weight:800;color:var(--a);margin:8px 0}.tip-buttons{display:flex;gap:7px;flex-wrap:wrap}.tip-buttons button{border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:9px;padding:7px 10px;cursor:pointer}
 .plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.plan-card h3{margin:0 0 6px}.plan-card p{margin:0}.emergency-number{font-size:2rem;font-weight:900;direction:ltr;text-align:center}.local-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.local-note{background:var(--soft);border-radius:10px;padding:10px;font-size:.88rem}.status{font-size:.88rem;color:var(--muted)}
 .compare-intro{background:var(--soft);border-right:4px solid var(--a);padding:12px 14px;border-radius:12px;margin-bottom:14px}
@@ -92,11 +92,34 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   </div>
 
   <div id="actualWeatherPanel" class="weather-panel" hidden>
-    <p>این بخش وضعیت غالب همان روز را از داده تاریخی Open-Meteo بازسازی می‌کند. معیار اصلی، نسبت ساعات آفتابی به روشنایی روز و تعداد ساعات بارش است؛ «شدیدترین کد روز» به‌تنهایی ملاک نیست.</p>
-    <div id="historicalWeatherStatus" class="status">در حال بارگیری داده تاریخی…</div>
-    <div id="historicalWeatherGrid" class="weather-grid" style="margin-top:10px"></div>
-    <p class="small">منبع: Open-Meteo Historical Weather. کد روزانه Open-Meteo شدیدترین وضعیت رخ‌داده در روز را نشان می‌دهد؛ برای جلوگیری از نمایش گمراه‌کننده، این صفحه وضعیت غالب را از ساعات آفتابی و ساعات بارش محاسبه می‌کند. داده‌ها reanalysis هستند و الزاماً معادل یک ایستگاه دقیق در همان نقطه نیستند.</p>
+  <p><b>نسخه ثابتِ وضعیت واقعی سفر.</b> این داده‌ها داخل خود صفحه ذخیره شده‌اند و برای نمایش به هیچ سرویس آب‌وهوایی وصل نمی‌شوند. جمع‌بندی با مقایسه آرشیوهای ایستگاهی/ساعتی، منابع تاریخی مستقل و تجربه ثبت‌شده سفر انجام شده است.</p>
+  <div class="weather-grid">
+    <div class="weather-card"><b>۳ نوامبر · Cancún</b><div class="wx">☀️ عمدتاً آفتابی و خشک</div><div>حدود ۳۱° / ۲۲°</div><div class="small">بارش ثبت‌شده در ایستگاه Cancún: صفر.</div><span class="status-pill status-done">اطمینان بالا</span></div>
+    <div class="weather-card"><b>۴ نوامبر · Chiquilá / Holbox</b><div class="wx">☀️ آفتابی تا عمدتاً آفتابی</div><div>حدود ۲۹–۳۱° / ۲۲–۲۶°</div><div class="small">منابع نزدیک‌به‌زمان سفر و آرشیو منطقه، روز را عمدتاً خشک نشان می‌دهند؛ یک منبع مدل‌محور بارش بیشتری گزارش کرده است.</div><span class="status-pill status-done">اطمینان متوسط‌به‌بالا</span></div>
+    <div class="weather-card"><b>۵ نوامبر · Holbox</b><div class="wx">🌤️ عمدتاً آفتابی با ابرهای پراکنده</div><div>حدود ۲۹–۳۱° / ۲۳–۲۶°</div><div class="small">عصر همان روز در گزارش نزدیک‌ترین ایستگاه «ابرهای پراکنده» ثبت شده و بارش مداوم تأیید نشد.</div><span class="status-pill status-partial">اطمینان متوسط</span></div>
+    <div class="weather-card"><b>۶ نوامبر · Valladolid</b><div class="wx">☀️ آفتابی، گرم و تقریباً خشک</div><div>دمای روز در منابع منطقه‌ای حدود ۳۰–۳۲°؛ بارش ناچیز</div><div class="small">آرشیو بارش فقط حدود ۰٫۱ میلی‌متر را نشان می‌دهد.</div><span class="status-pill status-done">اطمینان بالا</span></div>
+    <div class="weather-card"><b>۷ نوامبر · Chichén Itzá → Mérida</b><div class="wx">🌤️ گرم؛ صبح بهتر و بعدازظهر ابری‌تر</div><div>حدود ۳۱–۳۲° / ۲۲–۲۳°</div><div class="small">منابع درباره رگبار محلی بعدازظهر اختلاف دارند؛ اختلال مهمی در بازدید ثبت نشد.</div><span class="status-pill status-partial">اطمینان متوسط</span></div>
+    <div class="weather-card"><b>۸ نوامبر · Uxmal / Mérida</b><div class="wx">🌤️ آفتابی با مقداری ابر، گرم</div><div>حدود ۳۱–۳۲° / ۲۲°</div><div class="small">آرشیو ساعتی Mérida در بیشتر ساعات روز بارش صفر و آفتاب/ابر متناوب نشان می‌دهد.</div><span class="status-pill status-done">اطمینان بالا</span></div>
+    <div class="weather-card"><b>۹ نوامبر · Izamal → Bacalar</b><div class="wx">🌤️ عمدتاً خشک؛ آفتابی‌تر در ادامه روز</div><div>حدود ۳۰–۳۱° / ۲۱–۲۴°</div><div class="small">آرشیو بارش مستقل برای Bacalar صفر میلی‌متر ثبت کرده؛ داده ساعتی نیز بخش عمده روز را خشک نشان می‌دهد.</div><span class="status-pill status-done">اطمینان بالا</span></div>
+    <div class="weather-card"><b>۱۰ نوامبر · Bacalar</b><div class="wx">🌤️ آفتاب و ابر، خشک در ساعات اصلی روز</div><div>حدود ۳۰–۳۱° / ۱۸–۲۲°</div><div class="small">آرشیو ساعتی در طول روز بارش صفر نشان می‌دهد؛ تور قایق موتوری نیز انجام شد.</div><span class="status-pill status-done">اطمینان بالا</span></div>
+    <div class="weather-card"><b>۱۱ نوامبر · Tulum → Playa del Carmen</b><div class="wx">☀️ عمدتاً آفتابی در زمان بازدید</div><div>حدود ۲۹–۳۰° / ۲۲–۲۴°</div><div class="small">صبح تا عصر عمدتاً آفتابی/کمی ابری و خشک؛ برخی ایستگاه‌های اطراف رگبار محلی دیرتر را نشان می‌دهند.</div><span class="status-pill status-done">اطمینان بالا</span></div>
+    <div class="weather-card"><b>۱۲ نوامبر · Playa del Carmen</b><div class="wx">⛈️ ابری با باران شدید و رعدوبرق بعدازظهر</div><div>حدود ۲۶–۲۸° / ۲۲–۲۴°</div><div class="small">با تجربه مستقیم سفر هم تطابق دارد: باران شدید باعث تغییر برنامه شد.</div><span class="status-pill status-done">اطمینان بسیار بالا</span></div>
+    <div class="weather-card"><b>۱۳ نوامبر · Cancún</b><div class="wx">🌤️ آفتاب و ابر، عمدتاً خشک</div><div>حدود ۳۰° / ۲۲°</div><div class="small">آرشیو مشاهده‌شده فرودگاه/ایستگاه بارش صفر ثبت کرده؛ پیش‌بینی‌های قدیمیِ رعدوبرق به‌دلیل عدم تطابق با مشاهدات نهایی کنار گذاشته شدند.</div><span class="status-pill status-done">اطمینان بالا</span></div>
   </div>
+  <div class="notice" style="margin-top:14px"><b>روش جمع‌بندی:</b> اولویت با داده‌های مشاهده‌شده و آرشیوهای ساعتی/ایستگاهی پس از وقوع روز بوده است. پیش‌بینی‌های قدیمی فقط برای کنترل متقابل استفاده شده‌اند. در صورت اختلاف، گزارش مشاهده‌شده و تجربه واقعی سفر وزن بیشتری داشته‌اند.</div>
+  <p class="small weather-sources"><b>منابع مقایسه‌شده:</b>
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/history/monthly/mx/canc%C3%BAn">Weather Underground · Cancún History</a> ·
+    <a target="_blank" rel="noopener" href="https://www.timeanddate.com/weather/mexico/cancun/historic">Timeanddate · Cancún</a> ·
+    <a target="_blank" rel="noopener" href="https://www.timeanddate.com/weather/%403823208">Timeanddate · Holbox</a> ·
+    <a target="_blank" rel="noopener" href="https://mx.localconditions.com/yucatan/valladolid/past/">LocalConditions · Valladolid</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/MMMD/date/2026-11-8">Weather Underground · Mérida</a> ·
+    <a target="_blank" rel="noopener" href="https://mx.localconditions.com/quintana-roo/bacalar/past/">LocalConditions · Bacalar</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/mx/bacalar/IBACAL1/date/2026-11-10">Weather Underground · Bacalar</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/mx/tulum/date/2026-11-11">Weather Underground · Tulum</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/mx/la-playa/date/2026-11-12">Weather Underground · Playa del Carmen</a> ·
+    <a target="_blank" rel="noopener" href="https://www.timeanddate.com/weather/mexico/playa-del-carmen/historic">Timeanddate · Playa del Carmen</a>.
+  </p>
+</div>
 </section>
 
 <section id="map" class="card">
@@ -715,7 +738,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <tr><td class="es">No me siento bien.</td><td class="pron">نو مِه سیِنتو بیِن</td><td>حالم خوب نیست.</td><td><button class="copy" data-copy="No me siento bien.">کپی</button></td></tr>
 </tbody></table></div></section>
 
-<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۱۷ نوامبر ۲۰۲۶ · برنامه اولیه + اجرای واقعی + هزینه‌ها و یادداشت‌های سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
+<footer class="small" style="text-align:center;padding:25px 0 40px">آخرین ویرایش: ۱۸ نوامبر ۲۰۲۶ · برنامه اولیه + اجرای واقعی + هزینه‌ها و یادداشت‌های سفر · زمان فری، جاذبه‌ها و شرایط جاده ممکن است تغییر کند؛ قبل از هر روز دوباره بررسی شود.</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -878,59 +901,6 @@ function renderWeather(){
  renderToday();
 }
 document.getElementById('refreshWeather')?.addEventListener('click',()=>loadWeather(true));
-const historicalWxByDate={};
-function weatherLabelFa(code){
- if(code===0)return 'صاف';
- if([1,2].includes(code))return 'کمی تا نیمه‌ابری';
- if(code===3)return 'ابری';
- if([45,48].includes(code))return 'مه';
- if(code>=51&&code<=57)return 'نم‌نم باران';
- if(code>=61&&code<=67)return 'باران';
- if(code>=71&&code<=77)return 'برف';
- if(code>=80&&code<=82)return 'رگبار';
- if(code>=95)return 'رعدوبرق';
- return 'وضعیت ثبت‌شده';
-}
-function dominantWeatherFa(w){
- const daylight=Number(w.daylight||0),sunshine=Number(w.sunshine||0),rainHours=Number(w.precipHours||0),rain=Number(w.precip||0);
- const sunFrac=daylight>0?sunshine/daylight:0;
- if(rainHours>=4 && sunFrac<0.35)return {label:'بارانی / عمدتاً ابری',icon:'🌧️'};
- if(rainHours>=1 && sunFrac>=0.55)return {label:'عمدتاً آفتابی با رگبار کوتاه',icon:'🌦️'};
- if(rainHours>=1 && sunFrac>=0.35)return {label:'آفتابی و ابری با رگبار',icon:'🌦️'};
- if(rainHours>=1)return {label:'ابری با بارش پراکنده',icon:'🌧️'};
- if(sunFrac>=0.65)return {label:'عمدتاً آفتابی',icon:'☀️'};
- if(sunFrac>=0.45)return {label:'آفتابی و ابری',icon:'🌤️'};
- if(sunFrac>=0.25)return {label:'نیمه‌ابری',icon:'⛅'};
- return {label:'عمدتاً ابری',icon:'☁️'};
-}
-function hoursFa(seconds){return Number(seconds||0)/3600;}
-async function loadHistoricalWeather(){
- const status=document.getElementById('historicalWeatherStatus'),grid=document.getElementById('historicalWeatherGrid');
- if(!status||!grid)return;
- status.textContent='در حال بارگیری داده تاریخی…'; grid.innerHTML='';
- const groups={};
- weatherDays.forEach(d=>{const key=d.city+'|'+d.lat+'|'+d.lng;(groups[key]||(groups[key]={...d,dates:[]})).dates.push(d.date)});
- const results={};
- try{
-  await Promise.all(Object.values(groups).map(async g=>{
-   const dates=g.dates.slice().sort(),start=dates[0],end=dates.at(-1);
-   const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,daylight_duration,sunshine_duration,precipitation_sum,precipitation_hours,wind_speed_10m_max&timezone=auto&start_date='+start+'&end_date='+end;
-   const r=await fetch(url); if(!r.ok)throw new Error('historical '+r.status); const j=await r.json();
-   (j.daily?.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code?.[i],max:j.daily.temperature_2m_max?.[i],min:j.daily.temperature_2m_min?.[i],daylight:j.daily.daylight_duration?.[i],sunshine:j.daily.sunshine_duration?.[i],precip:j.daily.precipitation_sum?.[i],precipHours:j.daily.precipitation_hours?.[i],wind:j.daily.wind_speed_10m_max?.[i]};});
-  }));
-  Object.assign(historicalWxByDate,results);
-  weatherDays.forEach(d=>{
-    const w=historicalWxByDate[d.date],el=document.createElement('div'); el.className='weather-card'; const day=Number(d.date.slice(-2));
-    if(w){
-      const dom=dominantWeatherFa(w),sunH=hoursFa(w.sunshine),dayH=hoursFa(w.daylight); el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="wx">'+dom.icon+' '+dom.label+'</div><div>آفتاب: '+sunH.toFixed(1)+' از '+dayH.toFixed(1)+' ساعت روشنایی روز</div><div>بارش: '+Number(w.precip||0).toFixed(1)+' mm · '+Number(w.precipHours||0).toFixed(0)+' ساعت بارش</div><div>بیشینه/کمینه: '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div>بیشینه باد: '+Math.round(w.wind||0)+' km/h</div>';
-    } else el.innerHTML='<b>'+day+' نوامبر · '+d.city+'</b><div class="meta">داده تاریخی موجود نیست</div>';
-    grid.appendChild(el);
-  });
-  status.textContent='داده تاریخی بارگیری شد';
- }catch(e){
-  status.textContent='بارگیری داده تاریخی ممکن نشد.'; grid.innerHTML='<div class="notice">داده تاریخی فعلاً در دسترس نیست.</div>';
- }
-}
 function setWeatherMode(mode){
  const forecast=mode==='forecast';
  document.getElementById('forecastWeatherPanel').hidden=!forecast;
@@ -941,7 +911,7 @@ function setWeatherMode(mode){
 }
 document.getElementById('weatherModeForecast')?.addEventListener('click',()=>setWeatherMode('forecast'));
 document.getElementById('weatherModeActual')?.addEventListener('click',()=>setWeatherMode('actual'));
-loadHistoricalWeather();
+
 
 const routeByDate={
  '2026-11-04':[['Cancún','Chiquilá']],
