@@ -63,10 +63,33 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
   <p class="small">This remains the refreshable forecast view.</p>
 </div>
 <div id="actualWeatherPanel" class="weather-panel" hidden>
-  <p>This view reconstructs the dominant conditions for each travel day. The main signals are sunshine duration versus daylight and the number of rainy hours; the single daily weather code is not used as the dominant label.</p>
-  <div id="historicalWeatherStatus" class="status">Loading historical weather…</div>
-  <div id="historicalWeatherGrid" class="weather-grid" style="margin-top:10px"></div>
-  <p class="small">Source: Open-Meteo Historical Weather. Open-Meteo's daily weather code represents the most severe condition of the day, so this page derives the dominant label from sunshine and rainy hours instead. Historical data are reanalysis, not an exact station reading at each attraction.</p>
+  <p><b>Fixed record of the weather actually experienced during the trip.</b> These entries are embedded in this HTML and require no weather API or external data load to display. The summary was built by comparing station/hourly archives, independent historical sources and the trip log.</p>
+  <div class="weather-grid">
+    <div class="weather-card"><b>3 Nov · Cancún</b><div class="wx">☀️ Mostly sunny and dry</div><div>About 31° / 22°C</div><div class="small">Cancún station history records zero precipitation.</div><span class="status-pill status-done">High confidence</span></div>
+    <div class="weather-card"><b>4 Nov · Chiquilá / Holbox</b><div class="wx">☀️ Sunny to mostly sunny</div><div>About 29–31° / 22–26°C</div><div class="small">Near-real-time and regional archives support mostly dry conditions; one model-based source reported substantially more rain.</div><span class="status-pill status-done">Medium-high confidence</span></div>
+    <div class="weather-card"><b>5 Nov · Holbox</b><div class="wx">🌤️ Mostly sunny with scattered clouds</div><div>About 29–31° / 23–26°C</div><div class="small">A near-time station report showed scattered clouds that evening; sustained rainfall was not corroborated.</div><span class="status-pill status-partial">Medium confidence</span></div>
+    <div class="weather-card"><b>6 Nov · Valladolid</b><div class="wx">☀️ Sunny, hot and essentially dry</div><div>Regional daytime sources around 30–32°C; negligible rain</div><div class="small">An independent archive records only about 0.1 mm precipitation.</div><span class="status-pill status-done">High confidence</span></div>
+    <div class="weather-card"><b>7 Nov · Chichén Itzá → Mérida</b><div class="wx">🌤️ Hot; better morning, cloudier later</div><div>About 31–32° / 22–23°C</div><div class="small">Sources disagree about a localized afternoon shower; no major disruption was recorded during the visit.</div><span class="status-pill status-partial">Medium confidence</span></div>
+    <div class="weather-card"><b>8 Nov · Uxmal / Mérida</b><div class="wx">🌤️ Sunny with some clouds, hot</div><div>About 31–32° / 22°C</div><div class="small">Mérida hourly archives show zero rain for most/all daytime hours with alternating sun and clouds.</div><span class="status-pill status-done">High confidence</span></div>
+    <div class="weather-card"><b>9 Nov · Izamal → Bacalar</b><div class="wx">🌤️ Mostly dry, sunnier later</div><div>About 30–31° / 21–24°C</div><div class="small">An independent Bacalar precipitation archive records 0 mm; hourly data also keeps most of the day dry.</div><span class="status-pill status-done">High confidence</span></div>
+    <div class="weather-card"><b>10 Nov · Bacalar</b><div class="wx">🌤️ Sun and clouds, dry in the main daytime hours</div><div>About 30–31° / 18–22°C</div><div class="small">Hourly archive shows zero rain through the daytime; the motorboat tour went ahead.</div><span class="status-pill status-done">High confidence</span></div>
+    <div class="weather-card"><b>11 Nov · Tulum → Playa del Carmen</b><div class="wx">☀️ Mostly sunny during the visit</div><div>About 29–30° / 22–24°C</div><div class="small">Morning through afternoon was mostly sunny/partly cloudy and dry; some nearby stations show localized showers later.</div><span class="status-pill status-done">High confidence</span></div>
+    <div class="weather-card"><b>12 Nov · Playa del Carmen</b><div class="wx">⛈️ Cloudy with heavy afternoon rain/thunderstorms</div><div>About 26–28° / 22–24°C</div><div class="small">This also matches the trip log: heavy rain changed the day's plans.</div><span class="status-pill status-done">Very high confidence</span></div>
+    <div class="weather-card"><b>13 Nov · Cancún</b><div class="wx">🌤️ Sun and clouds, mostly dry</div><div>About 30° / 22°C</div><div class="small">Observed airport/station archives record zero precipitation; older thunderstorm forecasts were discarded because they did not match the observed history.</div><span class="status-pill status-done">High confidence</span></div>
+  </div>
+  <div class="notice" style="margin-top:14px"><b>Method:</b> post-event station observations and hourly historical archives were weighted above old forecasts. Forecast snapshots were used only as secondary checks. Where sources disagreed, observed data and the actual trip log were given more weight.</div>
+  <p class="small weather-sources"><b>Cross-checked sources:</b>
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/history/monthly/mx/canc%C3%BAn">Weather Underground · Cancún History</a> ·
+    <a target="_blank" rel="noopener" href="https://www.timeanddate.com/weather/mexico/cancun/historic">Timeanddate · Cancún</a> ·
+    <a target="_blank" rel="noopener" href="https://www.timeanddate.com/weather/%403823208">Timeanddate · Holbox</a> ·
+    <a target="_blank" rel="noopener" href="https://mx.localconditions.com/yucatan/valladolid/past/">LocalConditions · Valladolid</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/MMMD/date/2026-11-8">Weather Underground · Mérida</a> ·
+    <a target="_blank" rel="noopener" href="https://mx.localconditions.com/quintana-roo/bacalar/past/">LocalConditions · Bacalar</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/mx/bacalar/IBACAL1/date/2026-11-10">Weather Underground · Bacalar</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/mx/tulum/date/2026-11-11">Weather Underground · Tulum</a> ·
+    <a target="_blank" rel="noopener" href="https://www.wunderground.com/hourly/mx/la-playa/date/2026-11-12">Weather Underground · Playa del Carmen</a> ·
+    <a target="_blank" rel="noopener" href="https://www.timeanddate.com/weather/mexico/playa-del-carmen/historic">Timeanddate · Playa del Carmen</a>.
+  </p>
 </div>
 </section>
 
@@ -244,7 +267,7 @@ input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-r
 <div class="table-wrap"><table class="phrase-table"><tbody><tr><td class="es">Necesitamos ayuda.</td><td>We need help.</td><td><button class="copy" data-copy="Necesitamos ayuda.">Copy</button></td></tr><tr><td class="es">Necesito un médico.</td><td>I need a doctor.</td><td><button class="copy" data-copy="Necesito un médico.">Copy</button></td></tr><tr><td class="es">He perdido mi pasaporte.</td><td>I lost my passport.</td><td><button class="copy" data-copy="He perdido mi pasaporte.">Copy</button></td></tr><tr><td class="es">Tuvimos un accidente.</td><td>We had an accident.</td><td><button class="copy" data-copy="Tuvimos un accidente.">Copy</button></td></tr></tbody></table></div>
 </section>
 
-<footer class="small" style="text-align:center;padding:25px 0 40px">Updated 17 November 2026 · original plan + actual trip + expenses and travel notes</footer>
+<footer class="small" style="text-align:center;padding:25px 0 40px">Updated 18 November 2026 · original plan + actual trip + expenses and travel notes</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -265,59 +288,6 @@ function weatherIcon(c){if(c===0)return'☀️';if([1,2].includes(c))return'🌤
 async function loadWeather(force=false){const status=document.getElementById('weatherStatus'),grid=document.getElementById('weatherGrid');const ck='mx:weather:v2',now=Date.now();if(!force){try{const cache=JSON.parse(localStorage.getItem(ck)||'null');if(cache&&now-cache.ts<1800000){wxByDate=cache.data;renderWeather();status.textContent='Cached less than 30 minutes ago';return}}catch(e){}}status.textContent='Loading forecast…';const groups={};weatherDays.forEach(d=>{const k=d.city+'|'+d.lat+'|'+d.lng;(groups[k]||(groups[k]={...d,dates:[]})).dates.push(d.date)});const results={};try{await Promise.all(Object.values(groups).map(async g=>{const ds=g.dates.slice().sort(),url='https://api.open-meteo.com/v1/forecast?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date='+ds[0]+'&end_date='+ds.at(-1);const r=await fetch(url),j=await r.json();(j.daily.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_probability_max[i]}})}));wxByDate=results;localStorage.setItem(ck,JSON.stringify({ts:now,data:results}));renderWeather();status.textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}catch(e){status.textContent='Weather could not be loaded.';grid.innerHTML='<div class="notice">Online forecast unavailable. The itinerary still works.</div>'}}
 function renderWeather(){const grid=document.getElementById('weatherGrid');grid.innerHTML='';weatherDays.forEach(d=>{const w=wxByDate[d.date],el=document.createElement('div');el.className='weather-card';const day=Number(d.date.slice(-2));el.innerHTML=w?'<b>'+day+' Nov · '+d.city+'</b><div class="wx">'+weatherIcon(w.code)+' '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div class="'+(w.rain>=50?'rain-high':'')+'">Rain '+Math.round(w.rain||0)+'%</div>':'<b>'+day+' Nov · '+d.city+'</b><div>No data</div>';grid.appendChild(el);const art=document.querySelector('.day[data-date="'+d.date+'"]');if(art){let badge=art.querySelector('.day-weather');if(!badge){badge=document.createElement('div');badge.className='day-weather';art.querySelector('h3').insertAdjacentElement('afterend',badge)}badge.textContent=w?weatherIcon(w.code)+' '+Math.round(w.max)+'°/'+Math.round(w.min)+'° · rain '+Math.round(w.rain||0)+'%':'Weather: —'}});renderToday()}
 document.getElementById('refreshWeather').addEventListener('click',()=>loadWeather(true));
-const historicalWxByDate={};
-function weatherLabelEn(code){
- if(code===0)return 'Clear';
- if([1,2].includes(code))return 'Partly cloudy';
- if(code===3)return 'Overcast';
- if([45,48].includes(code))return 'Fog';
- if(code>=51&&code<=57)return 'Drizzle';
- if(code>=61&&code<=67)return 'Rain';
- if(code>=71&&code<=77)return 'Snow';
- if(code>=80&&code<=82)return 'Showers';
- if(code>=95)return 'Thunderstorm';
- return 'Recorded conditions';
-}
-function dominantWeatherEn(w){
- const daylight=Number(w.daylight||0),sunshine=Number(w.sunshine||0),rainHours=Number(w.precipHours||0);
- const sunFrac=daylight>0?sunshine/daylight:0;
- if(rainHours>=4 && sunFrac<0.35)return {label:'Rainy / mostly cloudy',icon:'🌧️'};
- if(rainHours>=1 && sunFrac>=0.55)return {label:'Mostly sunny with a brief shower',icon:'🌦️'};
- if(rainHours>=1 && sunFrac>=0.35)return {label:'Sun and clouds with showers',icon:'🌦️'};
- if(rainHours>=1)return {label:'Cloudy with scattered rain',icon:'🌧️'};
- if(sunFrac>=0.65)return {label:'Mostly sunny',icon:'☀️'};
- if(sunFrac>=0.45)return {label:'Sunny intervals',icon:'🌤️'};
- if(sunFrac>=0.25)return {label:'Partly cloudy',icon:'⛅'};
- return {label:'Mostly cloudy',icon:'☁️'};
-}
-function hoursEn(seconds){return Number(seconds||0)/3600;}
-async function loadHistoricalWeather(){
- const status=document.getElementById('historicalWeatherStatus'),grid=document.getElementById('historicalWeatherGrid');
- if(!status||!grid)return;
- status.textContent='Loading historical weather…'; grid.innerHTML='';
- const groups={};
- weatherDays.forEach(d=>{const key=d.city+'|'+d.lat+'|'+d.lng;(groups[key]||(groups[key]={...d,dates:[]})).dates.push(d.date)});
- const results={};
- try{
-  await Promise.all(Object.values(groups).map(async g=>{
-   const dates=g.dates.slice().sort(),start=dates[0],end=dates.at(-1);
-   const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&daily=weather_code,temperature_2m_max,temperature_2m_min,daylight_duration,sunshine_duration,precipitation_sum,precipitation_hours,wind_speed_10m_max&timezone=auto&start_date='+start+'&end_date='+end;
-   const r=await fetch(url); if(!r.ok)throw new Error('historical '+r.status); const j=await r.json();
-   (j.daily?.time||[]).forEach((date,i)=>{if(g.dates.includes(date))results[date]={city:g.city,code:j.daily.weather_code?.[i],max:j.daily.temperature_2m_max?.[i],min:j.daily.temperature_2m_min?.[i],daylight:j.daily.daylight_duration?.[i],sunshine:j.daily.sunshine_duration?.[i],precip:j.daily.precipitation_sum?.[i],precipHours:j.daily.precipitation_hours?.[i],wind:j.daily.wind_speed_10m_max?.[i]};});
-  }));
-  Object.assign(historicalWxByDate,results);
-  weatherDays.forEach(d=>{
-    const w=historicalWxByDate[d.date],el=document.createElement('div'); el.className='weather-card'; const day=Number(d.date.slice(-2));
-    if(w){
-      const dom=dominantWeatherEn(w),sunH=hoursEn(w.sunshine),dayH=hoursEn(w.daylight); el.innerHTML='<b>'+day+' Nov · '+d.city+'</b><div class="wx">'+dom.icon+' '+dom.label+'</div><div>Sunshine: '+sunH.toFixed(1)+' of '+dayH.toFixed(1)+' daylight hours</div><div>Precipitation: '+Number(w.precip||0).toFixed(1)+' mm · '+Number(w.precipHours||0).toFixed(0)+' rainy hours</div><div>High/low: '+Math.round(w.max)+'° / '+Math.round(w.min)+'°</div><div>Max wind: '+Math.round(w.wind||0)+' km/h</div>';
-    } else el.innerHTML='<b>'+day+' Nov · '+d.city+'</b><div class="meta">No historical data</div>';
-    grid.appendChild(el);
-  });
-  status.textContent='Historical weather loaded';
- }catch(e){
-  status.textContent='Historical weather could not be loaded.'; grid.innerHTML='<div class="notice">Historical weather is currently unavailable.</div>';
- }
-}
 function setWeatherMode(mode){
  const forecast=mode==='forecast';
  document.getElementById('forecastWeatherPanel').hidden=!forecast;
@@ -328,7 +298,7 @@ function setWeatherMode(mode){
 }
 document.getElementById('weatherModeForecast')?.addEventListener('click',()=>setWeatherMode('forecast'));
 document.getElementById('weatherModeActual')?.addEventListener('click',()=>setWeatherMode('actual'));
-loadHistoricalWeather();
+
 
 const routeByDate={'2026-11-04':[['Cancún','Chiquilá']],'2026-11-06':[['Chiquilá','Valladolid, Yucatán']],'2026-11-07':[['Valladolid, Yucatán','Chichén Itzá'],['Chichén Itzá','Mérida, Yucatán']],'2026-11-08':[['Mérida, Yucatán','Uxmal']],'2026-11-09':[['Mérida, Yucatán','Izamal'],['Izamal','Bacalar']],'2026-11-11':[['Bacalar','Tulum Archaeological Zone'],['Tulum Archaeological Zone','Playa del Carmen']],'2026-11-13':[['Playa del Carmen','Museo Maya de Cancún'],['Museo Maya de Cancún','Cancún International Airport']]};
 function dirUrl(a,b){return'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b)+'&travelmode=driving'}
